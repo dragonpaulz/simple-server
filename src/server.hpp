@@ -2,6 +2,7 @@
 #define server_hpp_
 
 #include <string>
+#include "serveroptions.hpp"
 
 namespace setup_server
 {

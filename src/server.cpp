@@ -6,10 +6,10 @@ using namespace setup_server;
 Server::Server(Server_Options options)
 {
     //TODO: fill out server
-    return;
 };
 
-void Serve(){
+void Server::Serve()
+{
     // starts server
     return;
 }
