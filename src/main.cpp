@@ -1,8 +1,12 @@
 #include <iostream>
+#include "server.hpp"
+#include "serveroptions.hpp"
 
-using namespace std;
-
-int main() {
-    cout << "Hello World!" << endl;
-    return 0;
+int main(int argc, char** argv)
+{
+    setup_server::Server_Options options(argv);
+    setup_server::Server server(options);
+    delete &options;
+    server.Serve();
+    delete &server;
 }
