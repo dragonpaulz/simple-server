@@ -7,9 +7,9 @@ namespace setup_server
 {
     class Server
     {
-    public:
-        Server Parse_server_options(std::string);
-        void Run_server();
+        public:
+        Server(Server_Options);
+        void Serve();
     };
 }
 
