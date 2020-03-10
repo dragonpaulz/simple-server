@@ -8,3 +8,9 @@ std::string HandleData::DataHandler::ReadBytes(std::byte[])
 {
     return "";
 }
+
+// Writes the bytes out to the proper location, terminal for example
+void WriteBytes(std::string)
+{
+    return;
+}
