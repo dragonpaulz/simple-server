@@ -2,12 +2,15 @@
 #define handler_hpp_
 
 #include <cstddef>
+#include <string>
 
-namespace handleData
+namespace HandleData
 {
     class DataHandler{
-        // Takes bytes of an unspecified length, and writes them out
-        void ReadBytes(std::byte[]);
+        // Takes bytes of an unspecified length, and returns a string to interpret data
+        std::string ReadBytes(std::byte[]);
+        // Write out bytes to a specified stream
+        void WriteBytes(std::string);
     };
 }
 
