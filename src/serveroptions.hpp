@@ -5,6 +5,7 @@ namespace setup_server {
     class Server_Options {
         public:
         Server_Options(char**);
+        int port;
     };
 }
 
