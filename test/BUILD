@@ -1,9 +1,9 @@
 cc_test(
     name = "tests",
-    srcs = glob(["**/*.cpp"]),
+    srcs = ["serveroptions_test.cpp"],
     copts = ["-Iexternal/gtest/include"],
     deps = [
-        "@gtest//:main",
+        "@googletest//:main",
         "//src:serverlib",
     ],
 )
