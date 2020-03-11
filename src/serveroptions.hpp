@@ -6,7 +6,7 @@
 namespace setup_server {
     class Server_Options {
         public:
-        Server_Options(char**);
+        Server_Options(int, char**);
         int port;
         const static uint16_t defaultPort = 1024;
     };
