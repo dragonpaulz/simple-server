@@ -7,8 +7,7 @@
 
 TEST(ServerOption_Test, GoodData)
 {
-    char** args = new char*{"./program --port 755"};
-    setup_server::Server_Options opts(3, args);
+    setup_server::Server_Options opts(uint16_t(755));
 
     EXPECT_EQ(uint16_t(755), opts.port);
 }

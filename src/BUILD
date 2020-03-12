@@ -19,5 +19,6 @@ cc_binary(
     srcs=["main.cpp"],
     deps=[
         ":serverlib",
+        "@boost//:program_options"
     ],
 )
