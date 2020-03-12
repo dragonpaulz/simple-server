@@ -6,11 +6,13 @@ cc_library(
     srcs=["handler.cpp",
         "server.cpp",
         "serveroptions.cpp",
+        "connection.cpp",
     ],
     hdrs=[
         "handler.hpp",
         "server.hpp",
         "serveroptions.hpp",
+        "connection.hpp",
     ],
 )
 
