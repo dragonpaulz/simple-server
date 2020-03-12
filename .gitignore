@@ -1,2 +1,6 @@
 server
 .vscode/
+bazel-bin
+bazel-out
+bazel-simple-server
+bazel-testlogs
