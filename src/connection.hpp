@@ -16,9 +16,7 @@ namespace server_setup{
             tcp::socket& socket();
             void start();
         private:
-            void handle_write(const boost::system::error_code&, size_t);
             tcp::socket socket_;
-            std::string message_;
     };
 }
 
