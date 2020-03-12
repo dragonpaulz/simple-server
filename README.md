@@ -1,9 +1,10 @@
-**Requirements
-- google test for unit tests
-- built using gcc version 7.4.0
+TCP Server
+==========
 
-** Command-line arguments
-\--port specifies a port number.
+Requirements
+------------
+Uses bazel for package management, building, and testing. makefile contains up-to-date commands for building, running, and testing application.
 
-**Assumptions
-If no port is provided, use a default port, namely 1024.
+Command-line arguments
+---
+`\--port` required, specifies a port number.
