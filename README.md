@@ -7,4 +7,4 @@ Uses bazel for package management, building, and testing. makefile contains up-t
 
 Command-line arguments
 ---
-`\--port` required, specifies a port number.
+`--port` required, specifies a port number.

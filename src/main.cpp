@@ -20,9 +20,12 @@ int main(int argc, char** argv)
         po::notify(vm);
 
         uint16_t port;
-        if (vm.count("port")) {
+        if (vm.count("port"))
+        {
             port = vm["port"].as<uint16_t>();
-        } else {
+        }
+        else
+        {
             std::cerr << "port must be set." << std::endl;
             return 1;
         }

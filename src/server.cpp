@@ -1,15 +1,21 @@
+#include <boost/asio.hpp>
+
 #include "server.hpp"
 #include "serveroptions.hpp"
 
-using namespace setup_server;
+using boost::asio::ip::tcp;
 
-Server::Server(Server_Options options)
-{
-    //TODO: fill out server
+class setup_server::Server{
+
+    Server(Server_Options options)
+    {
+        int port = options.port;
+    };
+
+    void Serve()
+    {
+
+        // starts server
+        return;
+    }
 };
-
-void Server::Serve()
-{
-    // starts server
-    return;
-}
