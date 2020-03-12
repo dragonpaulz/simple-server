@@ -1,19 +1,16 @@
+#include <algorithm>
 #include <cstdint>
+#include <string>
 #include "gtest/gtest.h"
 
 #include "../src/serveroptions.hpp"
 
-uint16_t ServerOptionsPortNumberHelper(char arguments[])
+TEST(ServerOption_Test, GoodData)
 {
-    char** args = new char*{arguments};
-    setup_server::Server_Options opts(args);
-    return opts.port;
-}
+    char** args = new char*{"./program --port 755"};
+    setup_server::Server_Options opts(3, args);
 
-TEST(ServerOption_Test, GoodData) 
-{
-    EXPECT_EQ(uint16_t(755), ServerOptionsPortNumberHelper("./program --port 755"));
-    // EXPECT_EQ(setup_server::Server_Options::defaultPort, ServerOptionsPortNumberHelper("./program"));
+    EXPECT_EQ(uint16_t(755), opts.port);
 }
 
 int main(int argc, char **argv)
