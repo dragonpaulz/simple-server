@@ -8,13 +8,24 @@ namespace handler
 {
     class Data{
         public:
-        Data Create(std::vector<uint8_t> in);
+        static Data Create(std::vector<uint8_t> in);
         // TODO: figure out a better way to represent the information, maybe with stoi?
-        const static std::vector<uint8_t> hello;
-        const static std::vector<uint8_t> data;
-        const static std::vector<uint8_t> goodbye;
+        enum Types {hello, data, goodbye};
+
+        Types msgType;
+        uint32_t msgLen;
+        std::string msg;
+
+        const static std::vector<uint8_t> helloBytes;
+        const static std::vector<uint8_t> dataBytes;
+        const static std::vector<uint8_t> goodbyeBytes;
         
         private:
+        Data(bool);
+        Data(std::vector<uint8_t>, std::vector<uint8_t>, std::vector<uint8_t>);
+
+        static Data InvalidInput() { return Data(false); };
+        const static int minBytes = 6;
         uint8_t type[]; // 2 bytes
         uint8_t length[]; // 4 bytes
         uint8_t message[]; // variable number of bytes, based on length value
