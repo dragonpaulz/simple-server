@@ -1,5 +1,6 @@
-#include <iostream>
+#include <boost/asio.hpp>
 #include <boost/program_options.hpp>
+#include <iostream>
 
 #include "server.hpp"
 #include "serveroptions.hpp"
@@ -31,8 +32,9 @@ int main(int argc, char** argv)
         }
 
         setup_server::Server_Options options(port);
-        setup_server::Server server(options);
-        server.Serve();
+        boost::asio::io_context io_context;
+        setup_server::Server server(io_context, options);
+        io_context.run();
 
         return 0;
     }
@@ -46,7 +48,5 @@ int main(int argc, char** argv)
         std::cerr << "unknown exception" << std::endl;
         return 1;
     }
-
-
 
 }
