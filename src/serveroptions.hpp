@@ -3,7 +3,7 @@
 
 #include <cstdint>
 
-namespace setup_server {
+namespace setup {
     class Server_Options {
         public:
         Server_Options(uint16_t);

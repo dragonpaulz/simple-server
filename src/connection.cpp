@@ -2,37 +2,22 @@
 #include <boost/asio.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
+#include <iostream>
 
 using boost::asio::ip::tcp;
 
-class server_setup::Connection
-  : public boost::enable_shared_from_this<server_setup::Connection>
+// static setup::Connection::pointer setup::Connection::create(boost::asio::io_context& io_context)
+// {
+    
+// }
+
+void setup::Connection::start()
 {
-    public:
-    typedef boost::shared_ptr<server_setup::Connection> pointer;
+    std::cout << "in connection start" << std::endl;
+    // do something here
+}
 
-    static pointer create(boost::asio::io_context& io_context)
-    {
-        return pointer(new server_setup::Connection::Connection(io_context));
-    }
-
-    tcp::socket& socket()
-    {
-        return socket_;
-    }
-
-    void start()
-    {
-        // do something here
-    }
-
-    private:
-
-    void handle_write(const boost::system::error_code& /*error*/,
-        size_t /*bytes_transferred*/)
-    {
-    }
-
-    tcp::socket socket_;
-    std::string message_;
-};
+void setup::Connection::handle_write(const boost::system::error_code& /*error*/,
+    size_t /*bytes_transferred*/)
+{
+}

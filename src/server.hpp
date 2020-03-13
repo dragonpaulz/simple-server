@@ -5,12 +5,13 @@
 #include <string>
 
 #include "serveroptions.hpp"
+#include "connection.hpp"
 
 using boost::asio::ip::tcp;
 
-namespace setup_server
+namespace setup
 {
-    class Server
+    class Server : public boost::enable_shared_from_this<Server>
     {
         public:
         Server(boost::asio::io_context& io_context, Server_Options opts)
@@ -22,7 +23,7 @@ namespace setup_server
 
         private:
             void start_accept();
-            // void handle_accept(server_setup::Connection::pointer, const boost::system::error_code&);
+            void handle_accept(Connection::pointer, const boost::system::error_code&);
             boost::asio::io_context& io_context_;
             tcp::acceptor acceptor_;
     };

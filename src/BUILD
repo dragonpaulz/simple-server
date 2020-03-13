@@ -14,6 +14,12 @@ cc_library(
         "serveroptions.hpp",
         "connection.hpp",
     ],
+    deps=[
+        "@boost//:asio",
+        "@boost//:bind",
+        "@boost//:enable_shared_from_this",
+        "@boost//:shared_ptr",
+    ],
 )
 
 cc_binary(
@@ -21,6 +27,7 @@ cc_binary(
     srcs=["main.cpp"],
     deps=[
         ":serverlib",
-        "@boost//:program_options"
+        "@boost//:asio",
+        "@boost//:program_options",
     ],
 )

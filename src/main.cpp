@@ -31,9 +31,9 @@ int main(int argc, char** argv)
             return 1;
         }
 
-        setup_server::Server_Options options(port);
+        setup::Server_Options options(port);
         boost::asio::io_context io_context;
-        setup_server::Server server(io_context, options);
+        setup::Server server(io_context, options);
         io_context.run();
 
         return 0;
