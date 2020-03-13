@@ -1,5 +1,6 @@
-#include <iostream>
+#include <boost/asio.hpp>
 #include <boost/program_options.hpp>
+#include <iostream>
 
 #include "server.hpp"
 #include "serveroptions.hpp"
@@ -20,16 +21,20 @@ int main(int argc, char** argv)
         po::notify(vm);
 
         uint16_t port;
-        if (vm.count("port")) {
+        if (vm.count("port"))
+        {
             port = vm["port"].as<uint16_t>();
-        } else {
+        }
+        else
+        {
             std::cerr << "port must be set." << std::endl;
             return 1;
         }
 
-        setup_server::Server_Options options(port);
-        setup_server::Server server(options);
-        server.Serve();
+        setup::Server_Options options(port);
+        boost::asio::io_context io_context;
+        setup::Server server(io_context, options);
+        io_context.run();
 
         return 0;
     }
@@ -43,7 +48,5 @@ int main(int argc, char** argv)
         std::cerr << "unknown exception" << std::endl;
         return 1;
     }
-
-
 
 }

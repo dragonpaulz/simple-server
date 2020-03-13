@@ -6,11 +6,19 @@ cc_library(
     srcs=["handler.cpp",
         "server.cpp",
         "serveroptions.cpp",
+        "connection.cpp",
     ],
     hdrs=[
         "handler.hpp",
         "server.hpp",
         "serveroptions.hpp",
+        "connection.hpp",
+    ],
+    deps=[
+        "@boost//:asio",
+        "@boost//:bind",
+        "@boost//:enable_shared_from_this",
+        "@boost//:shared_ptr",
     ],
 )
 
@@ -19,6 +27,7 @@ cc_binary(
     srcs=["main.cpp"],
     deps=[
         ":serverlib",
-        "@boost//:program_options"
+        "@boost//:asio",
+        "@boost//:program_options",
     ],
 )
