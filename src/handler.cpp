@@ -1,3 +1,4 @@
+#include <valarray>
 #include <string>
 
 #include "handler.hpp"
@@ -13,11 +14,24 @@ handler::Data::Data(bool isValid)
 
 handler::Data::Data handler::Data::Create(std::vector<uint8_t> in)
 {
-    if (in.size() < handler::Data::minBytes) {
+    if (in.size() < handler::Data::minBytes)
+    {
         return InvalidInput();
     }
 
     // first two bytes are type
+    std::vector<uint8_t> typeBytes(startType+typeLen);
+    for (int i = startType; i < startType + typeLen; i++)
+    {
+        typeBytes[i-startType] = in[i];
+    }
+
+    types type = GetTypeFromBytes(typeBytes);
+
+    if (type == types::unknown)
+    {
+        return InvalidInput();
+    }
 
     // next four bytes are length
     int valueLen = 0;
@@ -28,10 +42,13 @@ handler::Data::Data handler::Data::Create(std::vector<uint8_t> in)
         return InvalidInput();
     }
 
-    for (int i = handler::Data::minBytes; i < handler::Data::minBytes + valueLen; i++)
-    {
-        // write out message from bytes
-    }
+    std::string message = "";
+    // for (int i = handler::Data::minBytes; i < handler::Data::minBytes + valueLen; i++)
+    // {
+    //     // write out message from bytes
+    // }
+
+    return Data(type, valueLen, message);
 }
 
 // When a stream of bytes come in, this is the code that interprets the data, and returns a string of bytes
@@ -44,4 +61,16 @@ std::string handler::Data::ReadBytes()
 void WriteBytes(std::string)
 {
     return;
+}
+
+handler::Data::types handler::Data::GetTypeFromBytes(std::vector<uint8_t> typeBytes)
+{
+    if (typeBytes ==  helloBytes)
+    {
+        return types::hello;
+    }
+    else
+    {
+        return types::unknown;
+    }
 }

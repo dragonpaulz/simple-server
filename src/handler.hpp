@@ -10,9 +10,9 @@ namespace handler
         public:
         static Data Create(std::vector<uint8_t> in);
         // TODO: figure out a better way to represent the information, maybe with stoi?
-        enum Types {hello, data, goodbye};
+        enum types {hello, data, goodbye, unknown};
 
-        Types msgType;
+        types msgType;
         uint32_t msgLen;
         std::string msg;
 
@@ -22,7 +22,15 @@ namespace handler
         
         private:
         Data(bool);
-        Data(std::vector<uint8_t>, std::vector<uint8_t>, std::vector<uint8_t>);
+        Data(types, int, std::string);
+
+        static types GetTypeFromBytes(std::vector<uint8_t>);
+
+        const static int startType = 0;
+        const static int typeLen = 2;
+        const static int startLen = startType + typeLen;
+        const static int lenLen = 4;
+        const static int startData = startLen + lenLen;
 
         static Data InvalidInput() { return Data(false); };
         const static int minBytes = 6;
