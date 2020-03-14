@@ -3,16 +3,16 @@
 
 #include "handler.hpp"
 
-const std::vector<uint8_t> handler::Data::hello = std::vector<uint8_t>{uint8_t(240), uint8_t(16)}; // 0xE110
-const std::vector<uint8_t> handler::Data::data = {uint8_t(218), uint8_t(122)}; // 0xDA7A
-const std::vector<uint8_t> handler::Data::goodbye = {uint8_t(11), uint8_t(31)}; // 0x0B1E
+const std::vector<uint8_t> handler::Data::helloBytes = std::vector<uint8_t>{uint8_t(240), uint8_t(16)}; // 0xE110
+const std::vector<uint8_t> handler::Data::dataBytes = {uint8_t(218), uint8_t(122)}; // 0xDA7A
+const std::vector<uint8_t> handler::Data::goodbyeBytes = {uint8_t(11), uint8_t(31)}; // 0x0B1E
 
 handler::Data::Data(bool isValid)
 {
     valid = isValid;
 };
 
-handler::Data::Data handler::Data::Create(std::vector<uint8_t> in)
+handler::Data handler::Data::Create(std::vector<uint8_t> in)
 {
     if (in.size() < handler::Data::minBytes)
     {

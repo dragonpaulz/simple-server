@@ -26,17 +26,14 @@ namespace handler
 
         static types GetTypeFromBytes(std::vector<uint8_t>);
 
-        const static int startType = 0;
-        const static int typeLen = 2;
-        const static int startLen = startType + typeLen;
-        const static int lenLen = 4;
-        const static int startData = startLen + lenLen;
+        const static uint startType = 0;
+        const static uint typeLen = 2;
+        const static uint startLen = startType + typeLen;
+        const static uint lenLen = 4;
+        const static uint startData = startLen + lenLen;
 
         static Data InvalidInput() { return Data(false); };
         const static int minBytes = 6;
-        uint8_t type[]; // 2 bytes
-        uint8_t length[]; // 4 bytes
-        uint8_t message[]; // variable number of bytes, based on length value
         
         bool valid;
 
