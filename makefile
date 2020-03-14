@@ -4,11 +4,9 @@ build:
 clean:
 	bazel clean
 
-rebuild:
-	clean
-	build
+rebuild: clean build
 
-test:
+test-all:
 	bazel test test/...
 
 run:

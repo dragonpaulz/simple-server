@@ -24,7 +24,6 @@ namespace handler
 
         private:
         Data(bool);
-        
 
         static types GetTypeFromBytes(std::vector<uint8_t>);
 

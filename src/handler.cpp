@@ -76,6 +76,14 @@ handler::Data::types handler::Data::GetTypeFromBytes(std::vector<uint8_t> typeBy
     {
         return types::hello;
     }
+    else if (typeBytes == dataBytes)
+    {
+        return types::data;
+    }
+    else if (typeBytes == goodbyeBytes)
+    {
+        return types::goodbye;
+    }
     else
     {
         return types::unknown;
