@@ -1,4 +1,3 @@
-#include <algorithm>
 #include <cstdint>
 #include <string>
 #include "gtest/gtest.h"
@@ -7,7 +6,7 @@
 
 TEST(ServerOption_Test, GoodData)
 {
-    setup_server::Server_Options opts(uint16_t(755));
+    setup::Server_Options opts(uint16_t(755));
 
     EXPECT_EQ(uint16_t(755), opts.port);
 }

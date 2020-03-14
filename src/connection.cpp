@@ -6,11 +6,6 @@
 
 using boost::asio::ip::tcp;
 
-// static setup::Connection::pointer setup::Connection::create(boost::asio::io_context& io_context)
-// {
-    
-// }
-
 void setup::Connection::start()
 {
     std::cout << "in connection start" << std::endl;
