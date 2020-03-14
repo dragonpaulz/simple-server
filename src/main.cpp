@@ -12,9 +12,9 @@ int main(int argc, char** argv)
     try
     {
         po::options_description desc("Allowed options");
-            desc.add_options()
-                ("port,p", po::value<std::uint16_t>()->required(), "define port to listen on")
-            ;
+        desc.add_options()
+            ("port,p", po::value<std::uint16_t>()->required(), "define port to listen on")
+        ;
 
         po::variables_map vm;
         po::store(po::parse_command_line(argc, argv, desc), vm);
