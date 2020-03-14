@@ -9,7 +9,7 @@ const std::vector<uint8_t> handler::Data::goodbyeBytes = {uint8_t(11), uint8_t(3
 
 handler::Data::Data(bool isValid)
 {
-    valid = isValid;
+    _valid = isValid;
 };
 
 handler::Data::Data(handler::Data::types type, int len, std::string message)
@@ -17,6 +17,7 @@ handler::Data::Data(handler::Data::types type, int len, std::string message)
     msgType = type;
     msgLen = len;
     msg = message;
+    _valid = true;
 }
 
 handler::Data handler::Data::Create(std::vector<uint8_t> in)

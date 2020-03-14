@@ -11,8 +11,8 @@ namespace handler
         enum types {hello, data, goodbye, unknown};
         Data(types, int, std::string);
         static Data Create(std::vector<uint8_t> in);
-        // TODO: figure out a better way to represent the information, maybe with stoi?
         
+        bool getValid() {return _valid;}
 
         types msgType;
         uint32_t msgLen;
@@ -21,9 +21,11 @@ namespace handler
         const static std::vector<uint8_t> helloBytes;
         const static std::vector<uint8_t> dataBytes;
         const static std::vector<uint8_t> goodbyeBytes;
+        
+        const static uint minBytes = 6;
 
         private:
-        Data(bool);
+        Data(bool v);
 
         static types GetTypeFromBytes(std::vector<uint8_t>);
 
@@ -34,9 +36,9 @@ namespace handler
         const static uint startData = startLen + lenLen;
 
         static Data InvalidInput() { return Data(false); };
-        const static uint minBytes = 6;
         
-        bool valid;
+        
+        bool _valid;
 
         std::string ReadBytes();
         // Write out bytes to a specified stream
