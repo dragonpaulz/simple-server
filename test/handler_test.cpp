@@ -14,7 +14,7 @@ TEST(Handler_test, E110_Constructor_EmptyMsg)
     data out = data::Create(emptyHello);
 
     EXPECT_EQ(uint32_t(0), out.msgLen);
-    EXPECT_EQ(data::Types::hello, out.msgType);
+    EXPECT_EQ(data::types::hello, out.msgType);
 }
 
 int main(int argc, char **argv)
