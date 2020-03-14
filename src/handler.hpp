@@ -8,9 +8,11 @@ namespace handler
 {
     class Data{
         public:
+        enum types {hello, data, goodbye, unknown};
+        Data(types, int, std::string);
         static Data Create(std::vector<uint8_t> in);
         // TODO: figure out a better way to represent the information, maybe with stoi?
-        enum types {hello, data, goodbye, unknown};
+        
 
         types msgType;
         uint32_t msgLen;
@@ -19,10 +21,10 @@ namespace handler
         const static std::vector<uint8_t> helloBytes;
         const static std::vector<uint8_t> dataBytes;
         const static std::vector<uint8_t> goodbyeBytes;
-        
+
         private:
         Data(bool);
-        Data(types, int, std::string);
+        
 
         static types GetTypeFromBytes(std::vector<uint8_t>);
 
@@ -33,7 +35,7 @@ namespace handler
         const static uint startData = startLen + lenLen;
 
         static Data InvalidInput() { return Data(false); };
-        const static int minBytes = 6;
+        const static uint minBytes = 6;
         
         bool valid;
 

@@ -12,6 +12,13 @@ handler::Data::Data(bool isValid)
     valid = isValid;
 };
 
+handler::Data::Data(handler::Data::types type, int len, std::string message)
+{
+    msgType = type;
+    msgLen = len;
+    msg = message;
+}
+
 handler::Data handler::Data::Create(std::vector<uint8_t> in)
 {
     if (in.size() < handler::Data::minBytes)
@@ -21,7 +28,7 @@ handler::Data handler::Data::Create(std::vector<uint8_t> in)
 
     // first two bytes are type
     std::vector<uint8_t> typeBytes(startType+typeLen);
-    for (int i = startType; i < startType + typeLen; i++)
+    for (uint i = startType; i < startType + typeLen; i++)
     {
         typeBytes[i-startType] = in[i];
     }
