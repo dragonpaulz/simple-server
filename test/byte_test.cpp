@@ -54,6 +54,7 @@ TEST(Hex_test, isHexChar_Rejects_NonHex)
 TEST(Hex_Test, TwoHexToByte_HexStr)
 {
     EXPECT_EQ(uint8_t(0), byte::TwoHexToByte("00").getLen());
+    EXPECT_EQ(uint8_t(1), byte::TwoHexToByte("01").getLen());
     EXPECT_EQ(uint8_t(16), byte::TwoHexToByte("10").getLen());
     EXPECT_EQ(UINT8_MAX, byte::TwoHexToByte("FF").getLen());
 }
