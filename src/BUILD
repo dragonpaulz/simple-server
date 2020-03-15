@@ -9,6 +9,7 @@ cc_library(
         "serveroptions.cpp",
         "connection.cpp",
         "handler/Byte.cpp",
+        "handler/MsgLen.cpp",
     ],
     hdrs=[
         "handler.hpp",
@@ -16,6 +17,7 @@ cc_library(
         "serveroptions.hpp",
         "connection.hpp",
         "handler/Byte.hpp",
+        "handler/MsgLen.hpp",
     ],
     deps=[
         "@boost//:asio",
