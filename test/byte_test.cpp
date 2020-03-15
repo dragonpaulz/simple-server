@@ -45,6 +45,10 @@ TEST(Hex_test, isHexChar_Rejects_NonHex)
     EXPECT_FALSE(byte::isHexChar('z'));
     EXPECT_FALSE(byte::isHexChar('?'));
     EXPECT_FALSE(byte::isHexChar('-'));
+    EXPECT_FALSE(byte::isHexChar(':'));
+    EXPECT_FALSE(byte::isHexChar('/'));
+    EXPECT_FALSE(byte::isHexChar('@'));
+    EXPECT_FALSE(byte::isHexChar('`'));
 }
 
 TEST(Hex_Test, TwoHexToByte_HexStr)
