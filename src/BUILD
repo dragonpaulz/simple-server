@@ -3,16 +3,19 @@ package(default_visibility = ["//visibility:public"])
 
 cc_library(
     name="serverlib",
-    srcs=["handler.cpp",
+    srcs=[
+        "handler.cpp",
         "server.cpp",
         "serveroptions.cpp",
         "connection.cpp",
+        "handler/Byte.cpp",
     ],
     hdrs=[
         "handler.hpp",
         "server.hpp",
         "serveroptions.hpp",
         "connection.hpp",
+        "handler/Byte.hpp",
     ],
     deps=[
         "@boost//:asio",
