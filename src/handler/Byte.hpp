@@ -10,8 +10,16 @@ namespace handler
     {
         public:
             // responsible for converting two hex characters to bytes. Returns 0 for invalid input
-            static uint8_t TwoHexToByte(std::string hexStr);
+            static Byte TwoHexToByte(std::string hexStr);
             static bool isHexChar(char);
+
+            uint8_t getLen() { return len; };
+            bool isValid() { return valid; };
+        private:
+            Byte(bool, uint8_t);
+
+            bool valid;
+            uint8_t len;
     };
 }
 

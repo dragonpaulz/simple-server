@@ -53,16 +53,24 @@ TEST(Hex_test, isHexChar_Rejects_NonHex)
 
 TEST(Hex_Test, TwoHexToByte_HexStr)
 {
-    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte("00"));
-    EXPECT_EQ(uint8_t(16), byte::TwoHexToByte("10"));
-    EXPECT_EQ(UINT8_MAX, byte::TwoHexToByte("FF"));
+    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte("00").getLen());
+    EXPECT_EQ(uint8_t(16), byte::TwoHexToByte("10").getLen());
+    EXPECT_EQ(UINT8_MAX, byte::TwoHexToByte("FF").getLen());
 }
 
 TEST(Hex_Test, TwoHexToByte_BadData)
 {
-    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte("F"));
-    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte("F00"));
-    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte("G0"));
+    std::string singleChar = "F";
+    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte(singleChar).getLen());
+    EXPECT_FALSE(byte::TwoHexToByte(singleChar).isValid());
+
+    std::string threeChar = "FOO";
+    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte(threeChar).getLen());
+    EXPECT_FALSE(byte::TwoHexToByte(threeChar).isValid());
+
+    std::string invalidHex = "G0";
+    EXPECT_EQ(uint8_t(0), byte::TwoHexToByte(invalidHex).getLen());
+    EXPECT_FALSE(byte::TwoHexToByte(invalidHex).isValid());
 }
 
 int main(int argc, char **argv)
