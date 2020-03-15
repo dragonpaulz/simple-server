@@ -26,7 +26,7 @@ uint8_t byte::TwoHexToByte(std::string hexStr)
 
 bool byte::isHexChar(char c)
 {
-    return (c >= 65 && c <= 90) ||
-        (c >= 97 && c <= 122) ||
+    return (c >= 65 && c <= 70) ||
+        (c >= 97 && c <= 102) ||
         (c >= 48 && c <= 57);
 }
