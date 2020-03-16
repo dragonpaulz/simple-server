@@ -9,6 +9,10 @@ const std::vector<uint8_t> handler::Data::helloBytes = std::vector<uint8_t>{uint
 const std::vector<uint8_t> handler::Data::dataBytes = {uint8_t(218), uint8_t(122)}; // 0xDA7A
 const std::vector<uint8_t> handler::Data::goodbyeBytes = {uint8_t(11), uint8_t(31)}; // 0x0B1E
 
+const std::vector<char> handler::Data::helloChars = {'E', '1', '1', '0'};
+const std::vector<char> handler::Data::dataChars = {'D', 'A', '7', 'A'};
+const std::vector<char> handler::Data::goodbyeChars = {'0', 'B', '1', 'E'};
+
 using byte = handler::Byte;
 
 handler::Data::Data(bool isValid)

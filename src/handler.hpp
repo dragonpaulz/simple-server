@@ -25,7 +25,12 @@ namespace handler
         const static std::vector<uint8_t> dataBytes;
         const static std::vector<uint8_t> goodbyeBytes;
 
-        const static uint minBytes = 6;
+        const static std::vector<char> helloChars;
+        const static std::vector<char> dataChars;
+        const static std::vector<char> goodbyeChars;
+
+        const static uint minChars = 12;
+        const static uint minBytes = minChars/2;
 
         private:
         Data(bool v);
