@@ -12,6 +12,7 @@ namespace handler
             Byte(std::string);
 
             static bool isHexChar(char);
+            static uint8_t HexCharToUint8(char);
 
             uint8_t getLen() { return len; };
             bool isValid() { return valid; };

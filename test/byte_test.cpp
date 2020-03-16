@@ -84,6 +84,16 @@ TEST(Hex_Test, TwoHexToByte_BadData)
     EXPECT_FALSE(invalidHex.isValid());
 }
 
+TEST(Hex_Test, HexCharToUint8_ReturnsNumbers)
+{
+    EXPECT_EQ(uint8_t(0), byte::HexCharToUint8('0'));
+    EXPECT_EQ(uint8_t(9), byte::HexCharToUint8('9'));
+    EXPECT_EQ(uint8_t(10), byte::HexCharToUint8('a'));
+    EXPECT_EQ(uint8_t(15), byte::HexCharToUint8('f'));
+    EXPECT_EQ(uint8_t(10), byte::HexCharToUint8('A'));
+    EXPECT_EQ(uint8_t(15), byte::HexCharToUint8('F'));
+}
+
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
