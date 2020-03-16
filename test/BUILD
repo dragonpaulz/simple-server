@@ -28,12 +28,12 @@ cc_test(
     ],
 )
 
-cc_test(
-    name = "msglen-tests",
-    srcs = ["msglen_test.cpp"],
-    copts = ["-Iexternal/gtest/include"],
-    deps = [
-        "@googletest//:main",
-        "//src:serverlib",
-    ],
-)
+# cc_test(
+#     name = "msglen-tests",
+#     srcs = ["msglen_test.cpp"],
+#     copts = ["-Iexternal/gtest/include"],
+#     deps = [
+#         "@googletest//:main",
+#         "//src:serverlib",
+#     ],
+# )

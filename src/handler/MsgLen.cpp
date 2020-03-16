@@ -6,11 +6,13 @@
 handler::MsgLen::MsgLen(std::vector<char> lenChars)
 {
     bool validSoFar = lenChars.size() == handler::MsgLen::nChar;
-    std::vector<Byte> nums(nChar);
+    std::vector<handler::Byte> nums(nChar);
     for (int i = (nChar -1); i >= 0; i -= 2)
     {
         int thisByte = (i-1)/2;
-        nums[thisByte] = handler::Byte::TwoHexToByte(lenChars[i], lenChars[i-1]);
+        std::string s = {lenChars[i], lenChars[i-1], '\0'};
+        handler::Byte newByte(s);
+        nums[thisByte] = newByte;
     }
 
     len = 0;

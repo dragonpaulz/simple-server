@@ -6,6 +6,8 @@
 
 using data = handler::Data;
 
+const std::string zeroLen = "000000";
+
 TEST(Handler_test, E110_EmptyMsg)
 {
     std::vector<uint8_t> emptyHello = {data::helloBytes[0], data::helloBytes[1], uint8_t(0),
@@ -62,6 +64,16 @@ TEST(Handler_test, lengthMismatch_NotValid)
 
     data out = data::Create(lenMismatch);
     EXPECT_FALSE(out.getValid());
+}
+
+TEST(Handler_test, contains_message_valid)
+{
+    std::vector<uint8_t> helloWithMsg = {data::helloBytes[0], data::helloBytes[1], uint8_t(0),
+        uint8_t(0), uint8_t(0), uint8_t(1), uint8_t(1)};
+
+    data out = data::Create(helloWithMsg);
+
+    EXPECT_TRUE(out.getValid());
 }
 
 int main(int argc, char **argv)

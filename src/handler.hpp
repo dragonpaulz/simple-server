@@ -4,6 +4,9 @@
 #include <string>
 #include <vector>
 
+#include "handler/Byte.hpp"
+// #include "handler/MsgLen.hpp"
+
 namespace handler
 {
     class Data{
@@ -21,7 +24,7 @@ namespace handler
         const static std::vector<uint8_t> helloBytes;
         const static std::vector<uint8_t> dataBytes;
         const static std::vector<uint8_t> goodbyeBytes;
-        
+
         const static uint minBytes = 6;
 
         private:
@@ -32,15 +35,12 @@ namespace handler
         const static uint startType = 0;
         const static uint typeLen = 2;
         const static uint startLen = startType + typeLen;
-        const static uint lenLen = 4;
-        const static uint startData = startLen + lenLen;
+        // const static uint startData = startLen + handler::MsgLen::nBytes;
 
         static Data InvalidInput() { return Data(false); };
         
-        
         bool _valid;
 
-        std::string ReadBytes();
         // Write out bytes to a specified stream
         void WriteBytes(std::string);
     };

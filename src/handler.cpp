@@ -2,10 +2,13 @@
 #include <string>
 
 #include "handler.hpp"
+#include "handler/Byte.hpp"
 
 const std::vector<uint8_t> handler::Data::helloBytes = std::vector<uint8_t>{uint8_t(240), uint8_t(16)}; // 0xE110
 const std::vector<uint8_t> handler::Data::dataBytes = {uint8_t(218), uint8_t(122)}; // 0xDA7A
 const std::vector<uint8_t> handler::Data::goodbyeBytes = {uint8_t(11), uint8_t(31)}; // 0x0B1E
+
+using byte = handler::Byte;
 
 handler::Data::Data(bool isValid)
 {
@@ -44,6 +47,8 @@ handler::Data handler::Data::Create(std::vector<uint8_t> in)
     // next four bytes are length
     int valueLen = 0;
 
+    // byte::TwoHexToByte();
+
     // next series of bytes are the message
     if (in.size() != handler::Data::minBytes + valueLen)
     {
@@ -57,12 +62,6 @@ handler::Data handler::Data::Create(std::vector<uint8_t> in)
     // }
 
     return Data(type, valueLen, message);
-}
-
-// When a stream of bytes come in, this is the code that interprets the data, and returns a string of bytes
-std::string handler::Data::ReadBytes()
-{
-    return "";
 }
 
 // Writes the bytes out to the proper location, terminal for example
