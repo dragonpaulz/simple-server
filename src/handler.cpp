@@ -1,3 +1,4 @@
+#include <iostream>
 #include <valarray>
 #include <string>
 
@@ -30,18 +31,19 @@ handler::Data::Data(handler::Data::types type, int len, std::string message)
 
 handler::Data handler::Data::Create(std::vector<char> in)
 {
-    if (in.size() < handler::Data::minBytes)
+    if (in.size() < handler::Data::minChars)
     {
         return InvalidInput();
     }
 
-    // first two bytes are type
-    std::vector<uint8_t> typeBytes(startType+typeLenBytes);
-    for (uint i = startType; i < startType + typeLenBytes; i++)
+    // 2 bytes is the equivalent of 4 char. Reads chars 0 to 3.
+    std::vector<uint8_t> typeBytes(2);
+    for (uint i = 0; i < 2; i++)
     {
-        typeBytes[i-startType] = in[i];
+        typeBytes[i] = 16*handler::Byte::HexCharToUint8(in[i*2]) + handler::Byte::HexCharToUint8(in[i*2+1]);
     }
 
+    std::cout << "0: " << typeBytes[0] << " 1: " << typeBytes[1] << std::endl;
     types type = GetTypeFromBytes(typeBytes);
 
     if (type == types::unknown)
@@ -50,8 +52,8 @@ handler::Data handler::Data::Create(std::vector<char> in)
     }
 
     // next four bytes are length, encoding 8 characters
-    std::vector<char> lenBytes(8, 0);
-    MsgLen valueLen(lenBytes);
+    std::vector<char> lengthPortion(in[4], in[11]);
+    MsgLen valueLen(lengthPortion);
 
     // next series of bytes are the message
     if (valueLen.isValid() && in.size() != handler::Data::minBytes + valueLen.getLen())

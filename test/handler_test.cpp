@@ -74,17 +74,17 @@ TEST(Handler_test, lengthMismatch_NotValid)
     EXPECT_FALSE(out.getValid());
 }
 
-TEST(Handler_test, contains_message_valid)
-{
-    // std::vector<uint8_t> helloWithMsg = {data::helloBytes[0], data::helloBytes[1], uint8_t(0),
-    //     uint8_t(0), uint8_t(0), uint8_t(1), uint8_t(1)};
-    std::vector<char> helloWithMsg = {data::helloChars[0], data::helloChars[1], data::helloChars[2],
-        data::helloChars[3], '0', '0', '0', '0', '0', '0', '0', '1', '0', '0'};
+// TEST(Handler_test, contains_message_valid)
+// {
+//     // std::vector<uint8_t> helloWithMsg = {data::helloBytes[0], data::helloBytes[1], uint8_t(0),
+//     //     uint8_t(0), uint8_t(0), uint8_t(1), uint8_t(1)};
+//     std::vector<char> helloWithMsg = {data::helloChars[0], data::helloChars[1], data::helloChars[2],
+//         data::helloChars[3], '0', '0', '0', '0', '0', '0', '0', '1', '0', '0'};
 
-    data out = data::Create(helloWithMsg);
+//     data out = data::Create(helloWithMsg);
 
-    EXPECT_TRUE(out.getValid());
-}
+//     EXPECT_TRUE(out.getValid());
+// }
 
 int main(int argc, char **argv)
 {
