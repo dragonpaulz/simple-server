@@ -1,6 +1,7 @@
 #ifndef handler_MsgLen_hpp
 #define handler_MsgLen_hpp
 
+#include <cstdint>
 #include <vector>
 
 namespace handler
@@ -8,17 +9,17 @@ namespace handler
     class MsgLen
     {
         public:
-            const static uint nChar = 8;
-            const static uint nBytes = nChar/2;
+            const static unsigned int nChar;
+            const static unsigned int nBytes;
 
             MsgLen(std::vector<char>);
 
-            uint getLen();
-            bool isValid();
+            unsigned int getLen() {return len;}
+            bool isValid() {return valid;}
         private:
             // MsgLen(bool) exists for invalid input
             // MsgLen(bool);
-            uint len;
+            unsigned int len;
             bool valid;
     };
 }

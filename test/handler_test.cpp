@@ -66,7 +66,7 @@ TEST(Handler_test, lengthMismatch_NotValid)
     EXPECT_FALSE(out.getValid());
 }
 
-// not yet ready
+// not yet ready. Failing test that will come into play once I fix other parts
 // TEST(Handler_test, contains_message_valid)
 // {
 //     std::vector<uint8_t> helloWithMsg = {data::helloBytes[0], data::helloBytes[1], uint8_t(0),

@@ -8,11 +8,8 @@ namespace handler
     class Byte
     {
         public:
-            // responsible for converting two hex characters to bytes. Returns 0 for invalid input
+            Byte() {};
             Byte(std::string);
-            // Byte(char big, char small);
-
-            // Byte(bool, uint8_t);
 
             static bool isHexChar(char);
 
