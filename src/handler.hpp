@@ -13,7 +13,7 @@ namespace handler
         public:
         enum types {hello, data, goodbye, unknown};
         Data(types, int, std::string);
-        static Data Create(std::vector<uint8_t> in);
+        static Data Create(std::vector<char> in);
         
         bool getValid() {return _valid;}
 
@@ -33,8 +33,9 @@ namespace handler
         static types GetTypeFromBytes(std::vector<uint8_t>);
 
         const static uint startType = 0;
-        const static uint typeLen = 2;
-        const static uint startLen = startType + typeLen;
+        const static uint typeLenChar = 4;
+        const static uint typeLenBytes = typeLenChar / 2;
+        const static uint startLen = startType + typeLenBytes;
         // const static uint startData = startLen + handler::MsgLen::nBytes;
 
         static Data InvalidInput() { return Data(false); };
