@@ -10,6 +10,7 @@ cc_library(
         "connection.cpp",
         "handler/Byte.cpp",
         "handler/MsgLen.cpp",
+        "handler/TLVComponent/Type.cpp",
     ],
     hdrs=[
         "handler.hpp",
@@ -18,6 +19,7 @@ cc_library(
         "connection.hpp",
         "handler/Byte.hpp",
         "handler/MsgLen.hpp",
+        "handler/TLVComponent/Type.hpp",
     ],
     deps=[
         "@boost//:asio",

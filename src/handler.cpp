@@ -5,6 +5,7 @@
 #include "handler.hpp"
 #include "handler/Byte.hpp"
 #include "handler/MsgLen.hpp"
+#include "handler/TLVComponent/Type.hpp"
 
 const std::vector<uint8_t> handler::Data::helloBytes = std::vector<uint8_t>{uint8_t(240), uint8_t(16)}; // 0xE110
 const std::vector<uint8_t> handler::Data::dataBytes = {uint8_t(218), uint8_t(122)}; // 0xDA7A
@@ -21,12 +22,11 @@ handler::Data::Data(bool isValid)
     _valid = isValid;
 };
 
-handler::Data::Data(handler::Data::types type, int len, std::string message)
+handler::Data::Data(TLVComponent::Type type, int len, std::string message)
 {
     msgType = type;
     msgLen = len;
     msg = message;
-    _valid = true;
 }
 
 handler::Data handler::Data::Create(std::vector<char> in)
@@ -36,17 +36,34 @@ handler::Data handler::Data::Create(std::vector<char> in)
         return InvalidInput();
     }
 
+    // for (int p = 0; p < in.size(); p++)
+    // {
+    //     std::cout << in[p] << " ";
+    // }
+
+    // std::cout << std::endl;
+
     // 2 bytes is the equivalent of 4 char. Reads chars 0 to 3.
-    std::vector<uint8_t> typeBytes(2);
-    for (uint i = 0; i < 2; i++)
+    // std::vector<uint8_t> typeBytes(2);
+    // for (uint i = 0; i < 2; i++)
+    // {
+    //     typeBytes[i] = 16*handler::Byte::HexCharToUint8(in[i*2]) + handler::Byte::HexCharToUint8(in[i*2+1]);
+    // }
+
+    // std::cout << "0: " << typeBytes[0] << " 1: " << typeBytes[1] << std::endl;
+    // types type = GetTypeFromBytes(typeBytes);
+
+    std::vector<char> typeSection(in[0], in[3]);
+    std::cout << "typesection: ";
+    for (int p = 0; p < 4; p++)
     {
-        typeBytes[i] = 16*handler::Byte::HexCharToUint8(in[i*2]) + handler::Byte::HexCharToUint8(in[i*2+1]);
+        std::cout << typeSection[p];
     }
+    std::cout << std::endl;
 
-    std::cout << "0: " << typeBytes[0] << " 1: " << typeBytes[1] << std::endl;
-    types type = GetTypeFromBytes(typeBytes);
+    TLVComponent::Type msgType(typeSection);
 
-    if (type == types::unknown)
+    if (!msgType.isValid())
     {
         return InvalidInput();
     }
@@ -62,12 +79,8 @@ handler::Data handler::Data::Create(std::vector<char> in)
     }
 
     std::string message = "";
-    // for (int i = handler::Data::minBytes; i < handler::Data::minBytes + valueLen; i++)
-    // {
-    //     // write out message from bytes
-    // }
 
-    return Data(type, valueLen.getLen(), message);
+    return Data(msgType, valueLen.getLen(), message);
 }
 
 // Writes the bytes out to the proper location, terminal for example
