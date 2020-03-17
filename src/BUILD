@@ -20,6 +20,7 @@ cc_library(
         "handler/Byte.hpp",
         "handler/MsgLen.hpp",
         "handler/TLVComponent/Type.hpp",
+        "handler/TLVComponent/Value.hpp",
     ],
     deps=[
         "@boost//:asio",

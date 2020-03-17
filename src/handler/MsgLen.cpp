@@ -21,11 +21,11 @@ handler::MsgLen::MsgLen(std::vector<char> lenChars)
         nums[thisByte] = newByte;
     }
 
-    len = 0;
+    lenBytes = 0;
     for (unsigned int j = 0; j < nBytes; j++)
     {
         validSoFar &= nums[j].isValid();
-        len += uint(nums[j].getLen());
+        lenBytes += uint(nums[j].getLen());
     }
 
     valid = validSoFar;

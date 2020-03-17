@@ -6,6 +6,7 @@
 #include "handler/Byte.hpp"
 #include "handler/MsgLen.hpp"
 #include "handler/TLVComponent/Type.hpp"
+#include "handler/TLVComponent/Value.hpp"
 
 using byte = handler::Byte;
 
@@ -29,7 +30,7 @@ handler::Data handler::Data::Create(std::vector<char> in)
         return InvalidInput();
     }
 
-    // this could be done better with iterators
+    // TODO: use iterators constructor
     std::vector<char> typeSection{in[0], in[1], in[2], in[3]};
 
     TLVComponent::Type msgType(typeSection);
@@ -40,11 +41,29 @@ handler::Data handler::Data::Create(std::vector<char> in)
     }
 
     // next four bytes are length, encoding 8 characters
-    std::vector<char> lengthPortion(in[4], in[11]);
+    // TODO: use iterators constructor
+    std::vector<char> lengthPortion{in[4], in[5], in[6], in[7], in[8], in[9], in[10], in[11]};
     MsgLen valueLen(lengthPortion);
 
+    for (uint i = 0; i < lengthPortion.size(); i++ )
+    {
+        std::cout << lengthPortion[i] << " ";
+    }
+    std::cout << std::endl;
+    std::cout << "is Valid: " << valueLen.isValid() << " len " << valueLen.getLen() << " size " << in.size() << std::endl;
+
     // next series of bytes are the message
-    if (valueLen.isValid() && in.size() != handler::Data::minBytes + valueLen.getLen())
+    if (!valueLen.isValid() 
+        // || (in.size() != handler::Data::minChars + (valueLen.getLen()*2))
+        )
+    {
+        return InvalidInput();
+    }
+
+    std::vector<char> val(in.begin() + 12, in.end());
+    TLVComponent::Value actualValue(val);
+
+    if (!ValueIsOfLen(valueLen, actualValue))
     {
         return InvalidInput();
     }
@@ -58,4 +77,9 @@ handler::Data handler::Data::Create(std::vector<char> in)
 void WriteBytes(std::string)
 {
     return;
+}
+
+bool handler::Data::ValueIsOfLen(handler::MsgLen len, TLVComponent::Value val)
+{
+    return len.getLen() == val.value.size();
 }

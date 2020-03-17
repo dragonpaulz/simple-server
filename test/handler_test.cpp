@@ -58,7 +58,7 @@ TEST(Handler_test, unknown_EmptyMsg_NotValid)
 TEST(Handler_test, lengthMismatch_NotValid)
 {
     // assumes hello bytes is passing.
-    std::vector<char> lenMismatch(data::minChars + 1, '0');
+    std::vector<char> lenMismatch(data::minChars + 2, '0');
     lenMismatch[0] = typec::helloChars[0];
     lenMismatch[1] = typec::helloChars[1];
     lenMismatch[2] = typec::helloChars[2];
@@ -66,6 +66,22 @@ TEST(Handler_test, lengthMismatch_NotValid)
 
     data out = data::Create(lenMismatch);
     EXPECT_FALSE(out.getValid());
+}
+
+TEST(Handler_test, lengthGood_Valid)
+{
+    // assumes hello bytes is passing.
+    std::vector<char> withMessage(data::minChars + 2, '0');
+    withMessage[0] = typec::helloChars[0];
+    withMessage[1] = typec::helloChars[1];
+    withMessage[2] = typec::helloChars[2];
+    withMessage[3] = typec::helloChars[3];
+
+    withMessage[10] = '1';
+    // value "00"
+
+    data out = data::Create(withMessage);
+    EXPECT_TRUE(out.getValid());
 }
 
 int main(int argc, char **argv)

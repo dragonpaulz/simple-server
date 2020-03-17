@@ -6,7 +6,8 @@
 
 #include "handler/Byte.hpp"
 #include "handler/TLVComponent/Type.hpp"
-// #include "handler/MsgLen.hpp"
+#include "handler/TLVComponent/Value.hpp"
+#include "handler/MsgLen.hpp"
 
 namespace handler
 {
@@ -14,6 +15,7 @@ namespace handler
         public:
         Data(TLVComponent::Type, int, std::string);
         static Data Create(std::vector<char> in);
+        static bool ValueIsOfLen(handler::MsgLen, TLVComponent::Value);
         
         bool getValid() {return _valid;}
 

@@ -14,12 +14,12 @@ namespace handler
 
             MsgLen(std::vector<char>);
 
-            unsigned int getLen() {return len;}
+            // Length of value in bytes.
+            unsigned int getLen() {return lenBytes;}
+            // whether the input was valid or not
             bool isValid() {return valid;}
         private:
-            // MsgLen(bool) exists for invalid input
-            // MsgLen(bool);
-            unsigned int len;
+            unsigned int lenBytes;
             bool valid;
     };
 }
