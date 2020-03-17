@@ -4,10 +4,10 @@
 #include <string>
 #include <vector>
 
-#include "handler/Byte.hpp"
-#include "handler/TLVComponent/Type.hpp"
-#include "handler/TLVComponent/Value.hpp"
-#include "handler/TLVComponent/Length.hpp"
+#include "Byte.hpp"
+#include "TLVComponent/Type.hpp"
+#include "TLVComponent/Value.hpp"
+#include "TLVComponent/Length.hpp"
 
 namespace handler
 {

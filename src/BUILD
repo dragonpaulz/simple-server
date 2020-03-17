@@ -4,7 +4,7 @@ package(default_visibility = ["//visibility:public"])
 cc_library(
     name="serverlib",
     srcs=[
-        "handler.cpp",
+        "handler/handler.cpp",
         "setup/server.cpp",
         "setup/setup_helper/serveroptions.cpp",
         "setup/setup_helper/connection.cpp",
@@ -13,7 +13,7 @@ cc_library(
         "handler/TLVComponent/Type.cpp",
     ],
     hdrs=[
-        "handler.hpp",
+        "handler/handler.hpp",
         "setup/server.hpp",
         "setup/setup_helper/serveroptions.hpp",
         "setup/setup_helper/connection.hpp",
