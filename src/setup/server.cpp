@@ -3,7 +3,7 @@
 
 #include "server.hpp"
 #include "setup_helper/serveroptions.hpp"
-#include "../connection.hpp"
+#include "setup_helper/connection.hpp"
 
 using boost::asio::ip::tcp;
 
