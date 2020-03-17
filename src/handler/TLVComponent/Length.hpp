@@ -4,15 +4,15 @@
 #include <cstdint>
 #include <vector>
 
-namespace handler
+namespace TLVComponent
 {
-    class MsgLen
+    class Length
     {
         public:
             const static unsigned int nChar;
             const static unsigned int nBytes;
 
-            MsgLen(std::vector<char>);
+            Length(std::vector<char>);
 
             // Length of value in bytes.
             unsigned int getLen() {return lenBytes;}

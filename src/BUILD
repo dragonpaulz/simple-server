@@ -9,7 +9,7 @@ cc_library(
         "setup/setup_helper/serveroptions.cpp",
         "setup/setup_helper/connection.cpp",
         "handler/Byte.cpp",
-        "handler/MsgLen.cpp",
+        "handler/TLVComponent/Length.cpp",
         "handler/TLVComponent/Type.cpp",
     ],
     hdrs=[
@@ -18,7 +18,7 @@ cc_library(
         "setup/setup_helper/serveroptions.hpp",
         "setup/setup_helper/connection.hpp",
         "handler/Byte.hpp",
-        "handler/MsgLen.hpp",
+        "handler/TLVComponent/Length.hpp",
         "handler/TLVComponent/Type.hpp",
         "handler/TLVComponent/Value.hpp",
     ],

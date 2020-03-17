@@ -1,17 +1,17 @@
-#include "Byte.hpp"
-#include "MsgLen.hpp"
+#include "../Byte.hpp"
+#include "Length.hpp"
 
 #include <cstdint>
 #include <iostream>
 #include <vector>
 
-const unsigned int handler::MsgLen::nChar = 8;
+const unsigned int TLVComponent::Length::nChar = 8;
 
-const unsigned int handler::MsgLen::nBytes = nChar/2;
+const unsigned int TLVComponent::Length::nBytes = nChar/2;
 
-handler::MsgLen::MsgLen(std::vector<char> lenChars)
+TLVComponent::Length::Length(std::vector<char> lenChars)
 {
-    bool validSoFar = lenChars.size() == handler::MsgLen::nChar;
+    bool validSoFar = lenChars.size() == TLVComponent::Length::nChar;
     std::vector<handler::Byte> nums(nChar);
     for (int i = (nChar -1); i >= 0; i -= 2)
     {

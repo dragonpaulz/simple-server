@@ -1,7 +1,7 @@
-#include "../src/handler/MsgLen.hpp"
+#include "../src/handler/TLVComponent/Length.hpp"
 #include "gtest/gtest.h"
 
-using msglen = handler::MsgLen;
+using msglen = TLVComponent::Length;
 
 TEST(msglen_test, constructor_zerolength)
 {

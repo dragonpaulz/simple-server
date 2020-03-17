@@ -4,7 +4,7 @@
 
 #include "handler.hpp"
 #include "handler/Byte.hpp"
-#include "handler/MsgLen.hpp"
+#include "handler/TLVComponent/Length.hpp"
 #include "handler/TLVComponent/Type.hpp"
 #include "handler/TLVComponent/Value.hpp"
 
@@ -43,7 +43,7 @@ handler::Data handler::Data::Create(std::vector<char> in)
     // next four bytes are length, encoding 8 characters
     // TODO: use iterators constructor
     std::vector<char> lengthPortion{in[4], in[5], in[6], in[7], in[8], in[9], in[10], in[11]};
-    MsgLen valueLen(lengthPortion);
+    TLVComponent::Length valueLen(lengthPortion);
 
     // for (uint i = 0; i < lengthPortion.size(); i++ )
     // {
@@ -88,7 +88,7 @@ void WriteBytes(std::string)
     return;
 }
 
-bool handler::Data::ValueIsOfLen(handler::MsgLen len, TLVComponent::Value val)
+bool handler::Data::ValueIsOfLen(TLVComponent::Length len, TLVComponent::Value val)
 {
     return len.getLen() * 2 == val.value.size();
 }

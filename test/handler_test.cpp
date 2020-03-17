@@ -86,9 +86,9 @@ TEST(Handler_test, lengthGood_Valid)
 
 TEST(Handler_unittest_ValueIsOfLen, length_and_valuelength_match)
 {
-    std::vector<char> len1(handler::MsgLen::nChar, '0');
-    len1[handler::MsgLen::nChar - 1] = '1';
-    handler::MsgLen length1(len1);
+    std::vector<char> len1(TLVComponent::Length::nChar, '0');
+    len1[TLVComponent::Length::nChar - 1] = '1';
+    TLVComponent::Length length1(len1);
 
     std::vector<char> valueLen1Byte(2, '0');
     TLVComponent::Value value1Byte(valueLen1Byte);
@@ -99,9 +99,9 @@ TEST(Handler_unittest_ValueIsOfLen, length_and_valuelength_match)
 
 TEST(Handler_unittest_ValueIsOfLen, length_and_valuelength_donotmatch)
 {
-    std::vector<char> len1(handler::MsgLen::nChar, '0');
-    len1[handler::MsgLen::nChar - 1] = '1';
-    handler::MsgLen length1(len1);
+    std::vector<char> len1(TLVComponent::Length::nChar, '0');
+    len1[TLVComponent::Length::nChar - 1] = '1';
+    TLVComponent::Length length1(len1);
 
     std::vector<char> valueLen1Byte(4, '0');
     TLVComponent::Value value1Byte(valueLen1Byte);
