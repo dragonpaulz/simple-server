@@ -2,8 +2,8 @@
 #include <boost/bind.hpp>
 
 #include "server.hpp"
-#include "serveroptions.hpp"
-#include "connection.hpp"
+#include "../serveroptions.hpp"
+#include "../connection.hpp"
 
 using boost::asio::ip::tcp;
 

@@ -2,7 +2,7 @@
 #include <boost/program_options.hpp>
 #include <iostream>
 
-#include "server.hpp"
+#include "setup/server.hpp"
 #include "serveroptions.hpp"
 
 namespace po = boost::program_options;
