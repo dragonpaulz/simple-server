@@ -3,6 +3,7 @@
 #include "gtest/gtest.h"
 
 #include "../src/handler.hpp"
+#include "../src/handler/TLVComponent/Type.hpp"
 
 using data = handler::Data;
 
@@ -17,7 +18,7 @@ TEST(Handler_test, E110_EmptyMsg)
     
     data out = data::Create(emptyHello);
 
-    EXPECT_EQ(data::types::hello, out.msgType);
+    EXPECT_EQ(TLVComponent::Type::hello, out.msgType.getType());
     EXPECT_EQ(uint32_t(0), out.msgLen);
     EXPECT_TRUE(out.msg.empty());
     EXPECT_TRUE(out.getValid());
@@ -32,7 +33,7 @@ TEST(Handler_test, DA7A_EmptyMsg)
 
     data out = data::Create(emptyData);
 
-    EXPECT_EQ(data::types::data, out.msgType);
+    EXPECT_EQ(TLVComponent::Type::data, out.msgType.getType());
     EXPECT_EQ(uint32_t(0), out.msgLen);
     EXPECT_TRUE(out.msg.empty());
     EXPECT_TRUE(out.getValid());
@@ -47,7 +48,7 @@ TEST(Handler_test, 0B1E_EmptyMsg)
 
     data out = data::Create(emptyBye);
 
-    EXPECT_EQ(data::types::goodbye, out.msgType);
+    EXPECT_EQ(TLVComponent::Type::bye, out.msgType.getType());
     EXPECT_EQ(uint32_t(0), out.msgLen);
     EXPECT_TRUE(out.msg.empty());
     EXPECT_TRUE(out.getValid());

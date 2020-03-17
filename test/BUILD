@@ -37,3 +37,12 @@ cc_test(
         "//src:serverlib",
     ],
 )
+cc_test(
+    name = "type-tests",
+    srcs = ["msglen_test.cpp"],
+    copts = ["-Iexternal/gtest/include"],
+    deps = [
+        "@googletest//:main",
+        "//src:serverlib",
+    ],
+)
