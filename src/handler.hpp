@@ -4,43 +4,42 @@
 #include <string>
 #include <vector>
 
+#include "handler/Byte.hpp"
+#include "handler/TLVComponent/Type.hpp"
+#include "handler/TLVComponent/Value.hpp"
+#include "handler/MsgLen.hpp"
+
 namespace handler
 {
     class Data{
         public:
-        enum types {hello, data, goodbye, unknown};
-        Data(types, int, std::string);
-        static Data Create(std::vector<uint8_t> in);
+        Data(TLVComponent::Type, int, std::string);
+        static Data Create(std::vector<char> in);
+        static bool ValueIsOfLen(handler::MsgLen, TLVComponent::Value);
         
         bool getValid() {return _valid;}
 
-        types msgType;
+        TLVComponent::Type msgType;
         uint32_t msgLen;
         std::string msg;
 
-        const static std::vector<uint8_t> helloBytes;
-        const static std::vector<uint8_t> dataBytes;
-        const static std::vector<uint8_t> goodbyeBytes;
-        
-        const static uint minBytes = 6;
+        // TODO: This should read from each TLVComponent
+        const static uint minChars = 12;
+        const static uint minBytes = minChars/2;
 
         private:
         Data(bool v);
 
-        static types GetTypeFromBytes(std::vector<uint8_t>);
-
+        // TODO: Get values from corresponding TLV component
         const static uint startType = 0;
-        const static uint typeLen = 2;
-        const static uint startLen = startType + typeLen;
-        const static uint lenLen = 4;
-        const static uint startData = startLen + lenLen;
+        const static uint typeLenChar = 4;
+        const static uint typeLenBytes = typeLenChar / 2;
+        const static uint startLen = startType + typeLenBytes;
 
         static Data InvalidInput() { return Data(false); };
         
-        
         bool _valid;
 
-        std::string ReadBytes();
         // Write out bytes to a specified stream
         void WriteBytes(std::string);
     };

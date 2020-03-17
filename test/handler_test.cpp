@@ -3,17 +3,19 @@
 #include "gtest/gtest.h"
 
 #include "../src/handler.hpp"
+#include "../src/handler/TLVComponent/Type.hpp"
 
 using data = handler::Data;
+using typec = TLVComponent::Type;
 
 TEST(Handler_test, E110_EmptyMsg)
 {
-    std::vector<uint8_t> emptyHello = {data::helloBytes[0], data::helloBytes[1], uint8_t(0),
-        uint8_t(0), uint8_t(0), uint8_t(0)};
+    std::vector<char> emptyHello = {typec::helloChars[0], typec::helloChars[1], typec::helloChars[2],
+        typec::helloChars[3], '0', '0', '0', '0', '0', '0', '0', '0'};
     
     data out = data::Create(emptyHello);
 
-    EXPECT_EQ(data::types::hello, out.msgType);
+    EXPECT_EQ(TLVComponent::Type::hello, out.msgType.getType());
     EXPECT_EQ(uint32_t(0), out.msgLen);
     EXPECT_TRUE(out.msg.empty());
     EXPECT_TRUE(out.getValid());
@@ -21,12 +23,12 @@ TEST(Handler_test, E110_EmptyMsg)
 
 TEST(Handler_test, DA7A_EmptyMsg)
 {
-    std::vector<uint8_t> emptyData = {data::dataBytes[0], data::dataBytes[1], uint8_t(0),
-        uint8_t(0), uint8_t(0), uint8_t(0)};
+    std::vector<char> emptyData = {typec::dataChars[0], typec::dataChars[1], typec::dataChars[2],
+        typec::dataChars[3], '0', '0', '0', '0', '0', '0', '0', '0'};
 
     data out = data::Create(emptyData);
 
-    EXPECT_EQ(data::types::data, out.msgType);
+    EXPECT_EQ(TLVComponent::Type::data, out.msgType.getType());
     EXPECT_EQ(uint32_t(0), out.msgLen);
     EXPECT_TRUE(out.msg.empty());
     EXPECT_TRUE(out.getValid());
@@ -34,12 +36,12 @@ TEST(Handler_test, DA7A_EmptyMsg)
 
 TEST(Handler_test, 0B1E_EmptyMsg)
 {
-    std::vector<uint8_t> emptyBye = {data::goodbyeBytes[0], data::goodbyeBytes[1], uint8_t(0),
-        uint8_t(0), uint8_t(0), uint8_t(0)};
+    std::vector<char> emptyBye = {typec::byeChars[0], typec::byeChars[1], typec::byeChars[2],
+        typec::byeChars[3], '0', '0', '0', '0', '0', '0', '0', '0'};
 
     data out = data::Create(emptyBye);
 
-    EXPECT_EQ(data::types::goodbye, out.msgType);
+    EXPECT_EQ(TLVComponent::Type::bye, out.msgType.getType());
     EXPECT_EQ(uint32_t(0), out.msgLen);
     EXPECT_TRUE(out.msg.empty());
     EXPECT_TRUE(out.getValid());
@@ -47,7 +49,7 @@ TEST(Handler_test, 0B1E_EmptyMsg)
 
 TEST(Handler_test, unknown_EmptyMsg_NotValid)
 {
-    std::vector<uint8_t> emptyUnknown (data::minBytes, uint8_t(0));
+    std::vector<char> emptyUnknown (data::minChars, '0');
 
     data out = data::Create(emptyUnknown);
     EXPECT_FALSE(out.getValid());
@@ -56,12 +58,56 @@ TEST(Handler_test, unknown_EmptyMsg_NotValid)
 TEST(Handler_test, lengthMismatch_NotValid)
 {
     // assumes hello bytes is passing.
-    std::vector<uint8_t> lenMismatch(data::minBytes + 1, 0);
-    lenMismatch[0] = data::helloBytes[0];
-    lenMismatch[1] = data::helloBytes[1];
+    std::vector<char> lenMismatch(data::minChars + 2, '0');
+    lenMismatch[0] = typec::helloChars[0];
+    lenMismatch[1] = typec::helloChars[1];
+    lenMismatch[2] = typec::helloChars[2];
+    lenMismatch[3] = typec::helloChars[3];
 
     data out = data::Create(lenMismatch);
     EXPECT_FALSE(out.getValid());
+}
+
+TEST(Handler_test, lengthGood_Valid)
+{
+    // assumes hello bytes is passing.
+    std::vector<char> withMessage(data::minChars + 2, '0');
+    withMessage[0] = typec::helloChars[0];
+    withMessage[1] = typec::helloChars[1];
+    withMessage[2] = typec::helloChars[2];
+    withMessage[3] = typec::helloChars[3];
+
+    withMessage[11] = '1';
+    // value "00"
+
+    data out = data::Create(withMessage);
+    EXPECT_TRUE(out.getValid());
+}
+
+TEST(Handler_unittest_ValueIsOfLen, length_and_valuelength_match)
+{
+    std::vector<char> len1(handler::MsgLen::nChar, '0');
+    len1[handler::MsgLen::nChar - 1] = '1';
+    handler::MsgLen length1(len1);
+
+    std::vector<char> valueLen1Byte(2, '0');
+    TLVComponent::Value value1Byte(valueLen1Byte);
+
+    bool out = handler::Data::ValueIsOfLen(length1, valueLen1Byte);
+    EXPECT_TRUE(out);
+}
+
+TEST(Handler_unittest_ValueIsOfLen, length_and_valuelength_donotmatch)
+{
+    std::vector<char> len1(handler::MsgLen::nChar, '0');
+    len1[handler::MsgLen::nChar - 1] = '1';
+    handler::MsgLen length1(len1);
+
+    std::vector<char> valueLen1Byte(4, '0');
+    TLVComponent::Value value1Byte(valueLen1Byte);
+
+    bool out = handler::Data::ValueIsOfLen(length1, valueLen1Byte);
+    EXPECT_FALSE(out);
 }
 
 int main(int argc, char **argv)

@@ -1,7 +1,6 @@
 #ifndef handler_byte_hpp
 #define handler_byte_hpp
 
-#include <iostream>
 #include <string>
 
 namespace handler
@@ -9,15 +8,16 @@ namespace handler
     class Byte
     {
         public:
-            // responsible for converting two hex characters to bytes. Returns 0 for invalid input
-            static Byte TwoHexToByte(std::string hexStr);
+            Byte() {};
+            Byte(std::string);
+
             static bool isHexChar(char);
+            static uint8_t HexCharToUint8(char);
 
             uint8_t getLen() { return len; };
             bool isValid() { return valid; };
-        private:
-            Byte(bool, uint8_t);
 
+        private:
             bool valid;
             uint8_t len;
     };
