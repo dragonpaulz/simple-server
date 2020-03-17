@@ -2,7 +2,7 @@
 #include <valarray>
 #include <string>
 
-#include "handler.hpp"
+#include "TLVmessage.hpp"
 #include "Byte.hpp"
 #include "TLVComponent/Length.hpp"
 #include "TLVComponent/Type.hpp"
@@ -10,12 +10,12 @@
 
 using byte = handler::Byte;
 
-handler::Data::Data(bool isValid)
+handler::TLVmessage::TLVmessage(bool isValid)
 {
     _valid = isValid;
 };
 
-handler::Data::Data(TLVComponent::Type type, int len, std::string message)
+handler::TLVmessage::TLVmessage(TLVComponent::Type type, int len, std::string message)
 {
     msgType = type;
     msgLen = len;
@@ -23,9 +23,9 @@ handler::Data::Data(TLVComponent::Type type, int len, std::string message)
     _valid = true;
 }
 
-handler::Data handler::Data::Create(std::vector<char> in)
+handler::TLVmessage handler::TLVmessage::Create(std::vector<char> in)
 {
-    if (in.size() < handler::Data::minChars)
+    if (in.size() < handler::TLVmessage::minChars)
     {
         return InvalidInput();
     }
@@ -54,7 +54,7 @@ handler::Data handler::Data::Create(std::vector<char> in)
 
     // next series of bytes are the message
     if (!valueLen.isValid() 
-        // || (in.size() != handler::Data::minChars + (valueLen.getLen()*2))
+        // || (in.size() != handler::TLVmessage::minChars + (valueLen.getLen()*2))
         )
     {
         return InvalidInput();
@@ -79,7 +79,7 @@ handler::Data handler::Data::Create(std::vector<char> in)
 
     std::string message = "";
 
-    return Data(msgType, valueLen.getLen(), message);
+    return TLVmessage(msgType, valueLen.getLen(), message);
 }
 
 // Writes the bytes out to the proper location, terminal for example
@@ -88,7 +88,7 @@ void WriteBytes(std::string)
     return;
 }
 
-bool handler::Data::ValueIsOfLen(TLVComponent::Length len, TLVComponent::Value val)
+bool handler::TLVmessage::ValueIsOfLen(TLVComponent::Length len, TLVComponent::Value val)
 {
     return len.getLen() * 2 == val.value.size();
 }
