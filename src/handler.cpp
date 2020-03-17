@@ -7,14 +7,6 @@
 #include "handler/MsgLen.hpp"
 #include "handler/TLVComponent/Type.hpp"
 
-const std::vector<uint8_t> handler::Data::helloBytes = std::vector<uint8_t>{uint8_t(240), uint8_t(16)}; // 0xE110
-const std::vector<uint8_t> handler::Data::dataBytes = {uint8_t(218), uint8_t(122)}; // 0xDA7A
-const std::vector<uint8_t> handler::Data::goodbyeBytes = {uint8_t(11), uint8_t(31)}; // 0x0B1E
-
-const std::vector<char> handler::Data::helloChars = {'E', '1', '1', '0'};
-const std::vector<char> handler::Data::dataChars = {'D', 'A', '7', 'A'};
-const std::vector<char> handler::Data::goodbyeChars = {'0', 'B', '1', 'E'};
-
 using byte = handler::Byte;
 
 handler::Data::Data(bool isValid)
@@ -27,6 +19,7 @@ handler::Data::Data(TLVComponent::Type type, int len, std::string message)
     msgType = type;
     msgLen = len;
     msg = message;
+    _valid = true;
 }
 
 handler::Data handler::Data::Create(std::vector<char> in)
@@ -65,24 +58,4 @@ handler::Data handler::Data::Create(std::vector<char> in)
 void WriteBytes(std::string)
 {
     return;
-}
-
-handler::Data::types handler::Data::GetTypeFromBytes(std::vector<uint8_t> typeBytes)
-{
-    if (typeBytes ==  helloBytes)
-    {
-        return types::hello;
-    }
-    else if (typeBytes == dataBytes)
-    {
-        return types::data;
-    }
-    else if (typeBytes == goodbyeBytes)
-    {
-        return types::goodbye;
-    }
-    else
-    {
-        return types::unknown;
-    }
 }
