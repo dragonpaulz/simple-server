@@ -77,11 +77,37 @@ TEST(Handler_test, lengthGood_Valid)
     withMessage[2] = typec::helloChars[2];
     withMessage[3] = typec::helloChars[3];
 
-    withMessage[10] = '1';
+    withMessage[11] = '1';
     // value "00"
 
     data out = data::Create(withMessage);
     EXPECT_TRUE(out.getValid());
+}
+
+TEST(Handler_unittest_ValueIsOfLen, length_and_valuelength_match)
+{
+    std::vector<char> len1(handler::MsgLen::nChar, '0');
+    len1[handler::MsgLen::nChar - 1] = '1';
+    handler::MsgLen length1(len1);
+
+    std::vector<char> valueLen1Byte(2, '0');
+    TLVComponent::Value value1Byte(valueLen1Byte);
+
+    bool out = handler::Data::ValueIsOfLen(length1, valueLen1Byte);
+    EXPECT_TRUE(out);
+}
+
+TEST(Handler_unittest_ValueIsOfLen, length_and_valuelength_donotmatch)
+{
+    std::vector<char> len1(handler::MsgLen::nChar, '0');
+    len1[handler::MsgLen::nChar - 1] = '1';
+    handler::MsgLen length1(len1);
+
+    std::vector<char> valueLen1Byte(4, '0');
+    TLVComponent::Value value1Byte(valueLen1Byte);
+
+    bool out = handler::Data::ValueIsOfLen(length1, valueLen1Byte);
+    EXPECT_FALSE(out);
 }
 
 int main(int argc, char **argv)

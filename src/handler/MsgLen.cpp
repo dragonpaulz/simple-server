@@ -16,7 +16,7 @@ handler::MsgLen::MsgLen(std::vector<char> lenChars)
     for (int i = (nChar -1); i >= 0; i -= 2)
     {
         int thisByte = (i-1)/2;
-        std::string s = {lenChars[i], lenChars[i-1]};
+        std::string s = {lenChars[i-1], lenChars[i]};
         handler::Byte newByte(s);
         nums[thisByte] = newByte;
     }
