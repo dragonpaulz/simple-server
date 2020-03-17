@@ -4,18 +4,18 @@
 #include <string>
 #include <vector>
 
-#include "handler/Byte.hpp"
-#include "handler/TLVComponent/Type.hpp"
-#include "handler/TLVComponent/Value.hpp"
-#include "handler/MsgLen.hpp"
+#include "Byte.hpp"
+#include "TLVComponent/Type.hpp"
+#include "TLVComponent/Value.hpp"
+#include "TLVComponent/Length.hpp"
 
 namespace handler
 {
-    class Data{
+    class TLVmessage{
         public:
-        Data(TLVComponent::Type, int, std::string);
-        static Data Create(std::vector<char> in);
-        static bool ValueIsOfLen(handler::MsgLen, TLVComponent::Value);
+        TLVmessage(TLVComponent::Type, int, std::string);
+        static TLVmessage Create(std::vector<char> in);
+        static bool ValueIsOfLen(TLVComponent::Length, TLVComponent::Value);
         
         bool getValid() {return _valid;}
 
@@ -28,7 +28,7 @@ namespace handler
         const static uint minBytes = minChars/2;
 
         private:
-        Data(bool v);
+        TLVmessage(bool v);
 
         // TODO: Get values from corresponding TLV component
         const static uint startType = 0;
@@ -36,7 +36,7 @@ namespace handler
         const static uint typeLenBytes = typeLenChar / 2;
         const static uint startLen = startType + typeLenBytes;
 
-        static Data InvalidInput() { return Data(false); };
+        static TLVmessage InvalidInput() { return TLVmessage(false); };
         
         bool _valid;
 

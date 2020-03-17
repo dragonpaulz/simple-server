@@ -2,7 +2,7 @@
 #include <string>
 #include "gtest/gtest.h"
 
-#include "../src/serveroptions.hpp"
+#include "../src/setup/setup_helper/serveroptions.hpp"
 
 TEST(ServerOption_Test, GoodData)
 {
