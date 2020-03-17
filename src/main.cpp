@@ -3,7 +3,7 @@
 #include <iostream>
 
 #include "setup/server.hpp"
-#include "serveroptions.hpp"
+#include "setup/setup_helper/serveroptions.hpp"
 
 namespace po = boost::program_options;
 

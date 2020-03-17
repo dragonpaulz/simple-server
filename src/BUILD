@@ -6,7 +6,7 @@ cc_library(
     srcs=[
         "handler.cpp",
         "setup/server.cpp",
-        "serveroptions.cpp",
+        "setup/setup_helper/serveroptions.cpp",
         "connection.cpp",
         "handler/Byte.cpp",
         "handler/MsgLen.cpp",
@@ -15,7 +15,7 @@ cc_library(
     hdrs=[
         "handler.hpp",
         "setup/server.hpp",
-        "serveroptions.hpp",
+        "setup/setup_helper/serveroptions.hpp",
         "connection.hpp",
         "handler/Byte.hpp",
         "handler/MsgLen.hpp",
