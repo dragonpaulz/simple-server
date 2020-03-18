@@ -8,7 +8,9 @@ namespace TLVComponent
     class Type
     {
         public:
-        Type() { _type = unknown; }
+        // Constructor to indicate there's a problem with the Type section
+        Type(){}
+
         Type(std::vector<char>);
         
         enum types {hello, data, bye, unknown};

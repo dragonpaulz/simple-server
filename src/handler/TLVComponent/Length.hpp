@@ -12,6 +12,13 @@ namespace TLVComponent
             const static unsigned int nChar;
             const static unsigned int nBytes;
 
+            // Default constructor indicates something is wrong
+            Length()
+            {
+                lenBytes = 0;
+                valid = false;
+            }
+            
             Length(std::vector<char>);
 
             // Length of value in bytes.

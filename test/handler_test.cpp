@@ -13,11 +13,11 @@ TEST(Handler_test, E110_EmptyMsg)
     std::vector<char> emptyHello = {typec::helloChars[0], typec::helloChars[1], typec::helloChars[2],
         typec::helloChars[3], '0', '0', '0', '0', '0', '0', '0', '0'};
     
-    message out = message::Create(emptyHello);
+    message out(emptyHello);
 
-    EXPECT_EQ(TLVComponent::Type::hello, out.msgType.getType());
-    EXPECT_EQ(uint32_t(0), out.msgLen);
-    EXPECT_TRUE(out.msg.empty());
+    EXPECT_EQ(TLVComponent::Type::hello, out.getMsgType().getType());
+    EXPECT_EQ(uint32_t(0), out.getMsgLength().getLen());
+    EXPECT_TRUE(out.getMsgValue().getValue().empty());
     EXPECT_TRUE(out.getValid());
 }
 
@@ -26,11 +26,11 @@ TEST(Handler_test, DA7A_EmptyMsg)
     std::vector<char> emptyData = {typec::dataChars[0], typec::dataChars[1], typec::dataChars[2],
         typec::dataChars[3], '0', '0', '0', '0', '0', '0', '0', '0'};
 
-    message out = message::Create(emptyData);
+    message out(emptyData);
 
-    EXPECT_EQ(TLVComponent::Type::data, out.msgType.getType());
-    EXPECT_EQ(uint32_t(0), out.msgLen);
-    EXPECT_TRUE(out.msg.empty());
+    EXPECT_EQ(TLVComponent::Type::data, out.getMsgType().getType());
+    EXPECT_EQ(uint32_t(0), out.getMsgLength().getLen());
+    EXPECT_TRUE(out.getMsgValue().getValue().empty());
     EXPECT_TRUE(out.getValid());
 }
 
@@ -39,11 +39,11 @@ TEST(Handler_test, 0B1E_EmptyMsg)
     std::vector<char> emptyBye = {typec::byeChars[0], typec::byeChars[1], typec::byeChars[2],
         typec::byeChars[3], '0', '0', '0', '0', '0', '0', '0', '0'};
 
-    message out = message::Create(emptyBye);
+    message out(emptyBye);
 
-    EXPECT_EQ(TLVComponent::Type::bye, out.msgType.getType());
-    EXPECT_EQ(uint32_t(0), out.msgLen);
-    EXPECT_TRUE(out.msg.empty());
+    EXPECT_EQ(TLVComponent::Type::bye, out.getMsgType().getType());
+    EXPECT_EQ(uint32_t(0), out.getMsgLength().getLen());
+    EXPECT_TRUE(out.getMsgValue().getValue().empty());
     EXPECT_TRUE(out.getValid());
 }
 
@@ -51,7 +51,7 @@ TEST(Handler_test, unknown_EmptyMsg_NotValid)
 {
     std::vector<char> emptyUnknown (message::minChars, '0');
 
-    message out = message::Create(emptyUnknown);
+    message out(emptyUnknown);
     EXPECT_FALSE(out.getValid());
 }
 
@@ -64,7 +64,7 @@ TEST(Handler_test, lengthMismatch_NotValid)
     lenMismatch[2] = typec::helloChars[2];
     lenMismatch[3] = typec::helloChars[3];
 
-    message out = message::Create(lenMismatch);
+    message out(lenMismatch);
     EXPECT_FALSE(out.getValid());
 }
 
@@ -80,7 +80,7 @@ TEST(Handler_test, lengthGood_Valid)
     withMessage[11] = '1';
     // value "00"
 
-    message out = message::Create(withMessage);
+    message out(withMessage);
     EXPECT_TRUE(out.getValid());
 }
 
