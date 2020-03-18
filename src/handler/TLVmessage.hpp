@@ -13,15 +13,14 @@ namespace handler
 {
     class TLVmessage{
         public:
-        TLVmessage(TLVComponent::Type, int, std::string);
-        static TLVmessage Create(std::vector<char> in);
+        TLVmessage(std::vector<char> in);
         static bool ValueIsOfLen(TLVComponent::Length, TLVComponent::Value);
         
         bool getValid() {return _valid;}
 
-        TLVComponent::Type msgType;
-        uint32_t msgLen;
-        std::string msg;
+        TLVComponent::Type getMsgType() {return _type;}
+        TLVComponent::Length getMsgLength() {return _len;}
+        TLVComponent::Value getMsgValue() {return _value;}
 
         // TODO: This should read from each TLVComponent
         const static uint minChars = 12;
@@ -38,6 +37,9 @@ namespace handler
 
         static TLVmessage InvalidInput() { return TLVmessage(false); };
         
+        TLVComponent::Type _type;
+        TLVComponent::Length _len;
+        TLVComponent::Value _value;
         bool _valid;
 
         // Write out bytes to a specified stream

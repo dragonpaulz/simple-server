@@ -15,71 +15,55 @@ handler::TLVmessage::TLVmessage(bool isValid)
     _valid = isValid;
 };
 
-handler::TLVmessage::TLVmessage(TLVComponent::Type type, int len, std::string message)
+handler::TLVmessage::TLVmessage(std::vector<char> in)
 {
-    msgType = type;
-    msgLen = len;
-    msg = message;
-    _valid = true;
-}
+    _valid = in.size() >= handler::TLVmessage::minChars;
 
-handler::TLVmessage handler::TLVmessage::Create(std::vector<char> in)
-{
-    if (in.size() < handler::TLVmessage::minChars)
+    TLVComponent::Type* msgType;
+
+    if (_valid)
     {
-        return InvalidInput();
+        std::cout << "in first block" << std::endl;
+        // TODO: use iterators constructor
+        std::vector<char> typeSection {in[0], in[1], in[2], in[3]};
+
+        msgType = new TLVComponent::Type(typeSection);
+        std::cout << "type: " << msgType->getType() << std::endl;
     }
-
-    // TODO: use iterators constructor
-    std::vector<char> typeSection{in[0], in[1], in[2], in[3]};
-
-    TLVComponent::Type msgType(typeSection);
-
-    if (!msgType.isValid())
+    else
     {
-        return InvalidInput();
+        msgType = new TLVComponent::Type();
     }
+    
+    _valid &= msgType->isValid();
 
-    // next four bytes are length, encoding 8 characters
-    // TODO: use iterators constructor
-    std::vector<char> lengthPortion{in[4], in[5], in[6], in[7], in[8], in[9], in[10], in[11]};
-    TLVComponent::Length valueLen(lengthPortion);
 
-    // for (uint i = 0; i < lengthPortion.size(); i++ )
-    // {
-    //     std::cout << lengthPortion[i] << " ";
-    // }
-    // std::cout << std::endl;
-    // std::cout << "is Valid: " << valueLen.isValid() << " len " << valueLen.getLen() << " size " << in.size() << std::endl;
+    TLVComponent::Length* valueLen;
+    TLVComponent::Value* actualValue;
 
-    // next series of bytes are the message
-    if (!valueLen.isValid() 
-        // || (in.size() != handler::TLVmessage::minChars + (valueLen.getLen()*2))
-        )
+    if (_valid)
     {
-        return InvalidInput();
+        std::cout << "in second block" << std::endl;
+        // TODO: use iterators constructor
+        std::vector<char> lengthPortion{in[4], in[5], in[6], in[7], in[8], in[9], in[10], in[11]};
+        valueLen = new TLVComponent::Length(lengthPortion);
+
+        std::vector<char> val(in.begin() + 12, in.end());
+        actualValue = new TLVComponent::Value(val);
     }
-
-    std::vector<char> val(in.begin() + 12, in.end());
-    TLVComponent::Value actualValue(val);
-
-    std::cout << "len: " << valueLen.getLen() << " valid:" << valueLen.isValid();
-    std::cout << " actualValue: " << std::endl;
-
-    for (uint i = 0; i < actualValue.value.size(); i++)
+    else
     {
-        std::cout << actualValue.value[i] << ", ";
+        valueLen = new TLVComponent::Length();
+        actualValue = new TLVComponent::Value();
     }
-    std::cout << std::endl;
+    
 
-    if (!ValueIsOfLen(valueLen, actualValue))
-    {
-        return InvalidInput();
-    }
+    _valid &= ValueIsOfLen(*valueLen, *actualValue);
+    std::cout << "type: " << msgType->getType() << std::endl;
 
-    std::string message = "";
-
-    return TLVmessage(msgType, valueLen.getLen(), message);
+    _type = *msgType;
+    _len = *valueLen;
+    _value = *actualValue;
 }
 
 // Writes the bytes out to the proper location, terminal for example
@@ -90,5 +74,5 @@ void WriteBytes(std::string)
 
 bool handler::TLVmessage::ValueIsOfLen(TLVComponent::Length len, TLVComponent::Value val)
 {
-    return len.getLen() * 2 == val.value.size();
+    return len.getLen() * 2 == val.getValue().size();
 }
