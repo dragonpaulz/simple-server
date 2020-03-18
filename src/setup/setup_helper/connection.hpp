@@ -29,8 +29,7 @@ namespace setup{
             void start();
         private:
             tcp::socket socket_;
-            void handle_read(size_t);
-            string to_string(TLVComponent::TLVmessage);
+            void handle_read(const boost::system::error_code&, size_t);
     };
 }
 
