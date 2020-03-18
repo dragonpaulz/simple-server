@@ -2,8 +2,9 @@
 #define handler_byte_hpp
 
 #include <string>
+#include <vector>
 
-namespace handler
+namespace TLVhelper
 {
     class Byte
     {
@@ -12,6 +13,7 @@ namespace handler
             Byte(std::string);
 
             static bool isHexChar(char);
+            static bool areHexChar(std::vector<char>);
             static uint8_t HexCharToUint8(char);
 
             uint8_t getLen() { return len; };

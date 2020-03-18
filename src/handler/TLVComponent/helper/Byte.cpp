@@ -1,9 +1,10 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
 #include "Byte.hpp"
 
-using byte = handler::Byte;
+using byte = TLVhelper::Byte;
 
 byte::Byte(std::string hexStr)
 {
@@ -41,4 +42,23 @@ bool byte::isHexChar(char c)
     return isUpperLetter(c) ||
         isLowerLetter(c) ||
         isDigit(c);
+}
+
+bool byte::areHexChar(std::vector<char> chars)
+{
+    if (chars.size() < 1)
+    {
+        // special case. Not sure there's a right answer here
+        return true;
+    }
+
+    bool valid = isHexChar(chars[0]);
+
+    // start on second element
+    for (uint i = 1; i < chars.size() && valid; i++)
+    {
+        valid &= isHexChar(chars[i]);
+    }
+
+    return valid;
 }
