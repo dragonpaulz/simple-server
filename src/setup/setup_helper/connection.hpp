@@ -1,9 +1,13 @@
 #ifndef connection_hpp_
 #define connection_hpp_
 
+#include "../../handler/TLVComponent/TLVmessage.hpp"
+
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>
 #include <boost/enable_shared_from_this.hpp>
+
+#include <vector>
 
 using boost::asio::ip::tcp;
 
@@ -25,7 +29,8 @@ namespace setup{
             void start();
         private:
             tcp::socket socket_;
-            void handle_write(const boost::system::error_code& ,size_t);
+            void handle_read(size_t);
+            string to_string(TLVComponent::TLVmessage);
     };
 }
 
