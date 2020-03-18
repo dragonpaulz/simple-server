@@ -27,15 +27,7 @@ void setup::Connection::handle_read(size_t message)
     handler::TLVmessage msgIn(in);
     // additional checks with error logging for bad data here.
     // msg.isValid() to determine
-    to_string(msgIn);
-}
-
-std::string setup::Connection::to_string(handler::TLVmessage msg)
-{
-    // hard coding values. These are to be replaced
-    // ip address could come from either client, or from somewhere in asio
-    // port comes from server options
-    std::cout << "[ipaddress:port] [" << msg.getMsgType().to_string() << "] ["
-        << msg.getMsgLength().getLength() << "] [" 
-        << msg.getValue().to_string() << "]" << std::endl;
+    std::cout << "[ipaddress:port] [" << msgIn.getMsgType().to_string() << "] ["
+        << msgIn.getMsgLength().getLength() << "] [" 
+        << msgIn.getValue().to_string() << "]" << std::endl;
 }
