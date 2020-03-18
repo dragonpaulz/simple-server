@@ -1,7 +1,7 @@
 #include "../src/handler/TLVComponent/helper/Byte.hpp"
 #include "gtest/gtest.h"
 
-using byte = handler::Byte;
+using byte = TLVhelper::Byte;
 
 TEST(Hex_test, isHexChar_Accepts_0_to_9)
 {
