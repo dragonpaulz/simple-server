@@ -10,13 +10,13 @@ namespace TLVComponent
         public:
         // Constructor to indicate there's a problem with the Type section
         Type(){}
-
         Type(std::vector<char>);
         
         enum types {hello, data, bye, unknown};
 
         bool isValid() {return _valid; }
         types getType() {return _type; }
+        std::string to_string();
 
         const static std::vector<char> helloChars;
         const static std::vector<char> dataChars;

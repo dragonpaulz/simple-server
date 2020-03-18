@@ -13,10 +13,12 @@ namespace handler
 {
     class TLVmessage{
         public:
-        TLVmessage(std::vector<char> in);
         static bool ValueIsOfLen(TLVComponent::Length, TLVComponent::Value);
+
+        TLVmessage(std::vector<char> in);
         
         bool getValid() {return _valid;}
+        std::string to_string();
 
         TLVComponent::Type getMsgType() {return _type;}
         TLVComponent::Length getMsgLength() {return _len;}
