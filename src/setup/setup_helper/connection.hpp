@@ -1,7 +1,7 @@
 #ifndef connection_hpp_
 #define connection_hpp_
 
-#include "../../handler/TLVComponent/TLVmessage.hpp"
+#include "src/handler/TLVmessage.hpp"
 
 #include <boost/bind.hpp>
 #include <boost/asio.hpp>

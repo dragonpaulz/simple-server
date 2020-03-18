@@ -1,10 +1,12 @@
-#include "../../handler/TLVComponent/TLVmessage.hpp"
+#include "src/handler/TLVmessage.hpp"
+// #include "../../handler/TLVComponent/TLVmessage.hpp"
 #include "connection.hpp"
 
 #include <boost/asio.hpp>
 #include <boost/enable_shared_from_this.hpp>
 #include <boost/shared_ptr.hpp>
 #include <iostream>
+#include <string>
 #include <vector>
 
 using boost::asio::ip::tcp;
@@ -27,7 +29,7 @@ void setup::Connection::handle_read(size_t message)
     TLVComponent::TLVmessage msgIn(in);
     // additional checks with error logging for bad data here.
     // msg.isValid() to determine
-    toString(msgIn);
+    to_String(msgIn);
 }
 
 std::string setup::Connection::to_string(TLVComponent::TLVmessage msg)
