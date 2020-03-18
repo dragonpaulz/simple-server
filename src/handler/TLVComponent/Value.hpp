@@ -11,15 +11,13 @@ namespace TLVComponent
             // For use with bad data
             Value()
             {
-                _valid = false;
                 _value = std::vector<char>();
             }
             Value(std::vector<char> v) {_value = v;}
             
-            bool isValid() {return _valid;}
+            bool isValid();
             std::vector<char> getValue() {return _value;}
         private:
-            bool _valid;
             std::vector<char> _value;
     };
 }
