@@ -4,7 +4,7 @@
 
 #include "Byte.hpp"
 
-using byte = handler::Byte;
+using byte = TLVhelper::Byte;
 
 byte::Byte(std::string hexStr)
 {
