@@ -94,6 +94,36 @@ TEST(Hex_Test, HexCharToUint8_ReturnsNumbers)
     EXPECT_EQ(uint8_t(15), byte::HexCharToUint8('F'));
 }
 
+TEST(Hex_Test_UnitTest, VectorOfCharWithHex_AreHexChar)
+{
+    
+    std::vector<char> in{'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a',
+        'b', 'c', 'd', 'e', 'f', 'A', 'B', 'C', 'D', 'E', 'F'};
+    EXPECT_TRUE(byte::areHexChar(in));
+}
+
+TEST(Hex_Test_UnitTest, VectorOfCharWithHex_AreNotHexChar)
+{
+    
+    std::vector<char> in1{'G'};
+    std::vector<char> inH{'0', 'H'};
+    std::vector<char> inSpecialChar{'A', 'B', '/'};
+    std::vector<char> inWhiteSpace{'2', ' '};
+    
+    EXPECT_FALSE(byte::areHexChar(in1));
+    EXPECT_FALSE(byte::areHexChar(inH));
+    EXPECT_FALSE(byte::areHexChar(inSpecialChar));
+    EXPECT_FALSE(byte::areHexChar(inWhiteSpace));
+}
+
+TEST(Hex_Test_UnitTest, VectorOfCharWithHex_SpecialCase)
+{
+    std::vector<char> in0{};
+
+    EXPECT_TRUE(byte::areHexChar(in0));
+}
+
+
 int main(int argc, char **argv)
 {
     testing::InitGoogleTest(&argc, argv);
