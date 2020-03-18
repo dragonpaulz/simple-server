@@ -8,7 +8,7 @@ TEST(ServerOption_Test, GoodData)
 {
     setup::Server_Options opts(uint16_t(755));
 
-    EXPECT_EQ(uint16_t(755), opts.port);
+    EXPECT_EQ(uint16_t(755), opts.getPort());
 }
 
 int main(int argc, char **argv)

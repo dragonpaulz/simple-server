@@ -6,5 +6,5 @@
 
 setup::Server_Options::Server_Options(uint16_t port)
 {
-    this->port = port;
+    this->_port = port;
 }

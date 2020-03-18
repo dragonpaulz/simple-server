@@ -16,7 +16,7 @@ namespace setup
         public:
         Server(boost::asio::io_context& io_context, Server_Options opts)
         : io_context_(io_context),
-            acceptor_(io_context, tcp::endpoint(tcp::v4(), opts.port))
+            acceptor_(io_context, tcp::endpoint(tcp::v4(), opts.getPort()))
         {
             start_accept();
         }

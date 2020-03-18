@@ -4,11 +4,14 @@
 #include <cstdint>
 
 namespace setup {
-    class Server_Options {
+    class Server_Options
+    {
         public:
         Server_Options(uint16_t);
-        int port;
-        const static uint16_t defaultPort = 1024;
+        int getPort() { return _port;}
+
+        private:
+        int _port;
     };
 }
 
