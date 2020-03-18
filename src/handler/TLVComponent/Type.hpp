@@ -1,6 +1,7 @@
 #ifndef TLVCOMPONENT_TYPE_HPP
 #define TLVCOMPONENT_TYPE_HPP
 
+#include <string>
 #include <vector>
 
 namespace TLVComponent
