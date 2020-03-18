@@ -28,6 +28,6 @@ void setup::Connection::handle_read(size_t message)
     // additional checks with error logging for bad data here.
     // msg.isValid() to determine
     std::cout << "[ipaddress:port] [" << msgIn.getMsgType().to_string() << "] ["
-        << msgIn.getMsgLength().getLength() << "] [" 
-        << msgIn.getValue().to_string() << "]" << std::endl;
+        << msgIn.getMsgLength().getLen() << "] [" 
+        << msgIn.getMsgValue().to_string() << "]" << std::endl;
 }
