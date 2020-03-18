@@ -14,11 +14,12 @@ using boost::asio::ip::tcp;
 void setup::Connection::start()
 {
     std::cout << "in connection start" << std::endl;
-    std::string message_ = "E11000000000DA7A0000000501020304050B1E00000000";
+    // std::string message_ = "E11000000000DA7A0000000501020304050B1E00000000";
+    boost::asio::streambuf response_;
 
     boost::asio::async_read(
         socket_,
-        boost::asio::buffer(message_),
+        response_,
         boost::bind(
             &setup::Connection::handle_read,
             shared_from_this(),
@@ -30,6 +31,7 @@ void setup::Connection::start()
 
 void setup::Connection::handle_read(const boost::system::error_code& error, size_t message)
 {
+    std::cout << "error_code: " << error << std::endl;
     std::cout << "message: " << message << std::endl;
     std::vector<char> in(message);
 
@@ -45,5 +47,4 @@ void setup::Connection::handle_read(const boost::system::error_code& error, size
     {
         std::cerr << "Invalid input: " << message << std::endl;
     }
-    
 }

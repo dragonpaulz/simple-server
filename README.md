@@ -15,7 +15,10 @@ Uses bazel for package management, building, and testing. makefile contains up-t
 ---
 src/setup/setup_helper/connection.cpp has notes on what I want to do, but need to actually do it.
 
-* Once a client connects, interpret the bytes to vector<char> so that TLVmessage can be created, and print to screen.
+* Client blocks when making a call.
+* Getting printout requires SIGINT on client-side.
+    * when doing call again, getting error `nc: bind failed: Address already in use`
+* I am getting the number of bytes, but not the actual bytes themselves into connection class. I don't know how to get around this yet.
 * How to get server address. Options include:
     * asio library may have something
     * client input (so if they're connection from outside, show ip address they used)
