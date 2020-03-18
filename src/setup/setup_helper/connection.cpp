@@ -14,7 +14,7 @@ using boost::asio::ip::tcp;
 void setup::Connection::start()
 {
     std::cout << "in connection start" << std::endl;
-    std::string message_ = "test";
+    std::string message_ = "E11000000000DA7A0000000501020304050B1E00000000";
 
     boost::asio::async_read(
         socket_,
@@ -30,6 +30,7 @@ void setup::Connection::start()
 
 void setup::Connection::handle_read(const boost::system::error_code& error, size_t message)
 {
+    std::cout << "message: " << message << std::endl;
     std::vector<char> in(message);
 
     handler::TLVmessage msgIn(in);
