@@ -3,12 +3,9 @@
 #include <string>
 
 #include "TLVmessage.hpp"
-#include "Byte.hpp"
 #include "TLVComponent/Length.hpp"
 #include "TLVComponent/Type.hpp"
 #include "TLVComponent/Value.hpp"
-
-using byte = handler::Byte;
 
 handler::TLVmessage::TLVmessage(bool isValid)
 {
@@ -23,12 +20,10 @@ handler::TLVmessage::TLVmessage(std::vector<char> in)
 
     if (_valid)
     {
-        std::cout << "in first block" << std::endl;
         // TODO: use iterators constructor
         std::vector<char> typeSection {in[0], in[1], in[2], in[3]};
 
         msgType = new TLVComponent::Type(typeSection);
-        std::cout << "type: " << msgType->getType() << std::endl;
     }
     else
     {
@@ -43,7 +38,6 @@ handler::TLVmessage::TLVmessage(std::vector<char> in)
 
     if (_valid)
     {
-        std::cout << "in second block" << std::endl;
         // TODO: use iterators constructor
         std::vector<char> lengthPortion{in[4], in[5], in[6], in[7], in[8], in[9], in[10], in[11]};
         valueLen = new TLVComponent::Length(lengthPortion);
@@ -59,7 +53,6 @@ handler::TLVmessage::TLVmessage(std::vector<char> in)
     
 
     _valid &= ValueIsOfLen(*valueLen, *actualValue);
-    std::cout << "type: " << msgType->getType() << std::endl;
 
     _type = *msgType;
     _len = *valueLen;
