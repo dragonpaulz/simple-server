@@ -39,10 +39,21 @@ cc_test(
 )
 cc_test(
     name = "type-tests",
-    srcs = ["msglen_test.cpp"],
+    srcs = ["type_test.cpp"],
     copts = ["-Iexternal/gtest/include"],
     deps = [
         "@googletest//:main",
         "//src:serverlib",
     ],
 )
+
+# cc_test(
+#     name = "value-tests",
+#     srcs = ["value_test.cpp"],
+#     copts = ["-Iexternal/gtest/include"],
+#     deps = [
+#         "@googletest//:main",
+#         "//src:serverlib",
+#     ],
+# )
+
