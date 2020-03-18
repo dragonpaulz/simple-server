@@ -22,7 +22,6 @@ src/setup/setup_helper/connection.cpp has notes on what I want to do, but need t
 * How to get server address. Options include:
     * asio library may have something
     * client input (so if they're connection from outside, show ip address they used)
-* Add deconstructors
 * Allow connections through ipv6
 
 ###Room for improvement
