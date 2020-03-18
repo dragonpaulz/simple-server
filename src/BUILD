@@ -10,6 +10,7 @@ cc_library(
         "setup/setup_helper/connection.cpp",
         "handler/TLVComponent/Length.cpp",
         "handler/TLVComponent/Type.cpp",
+        "handler/TLVComponent/Value.cpp",
         "handler/TLVComponent/helper/Byte.cpp",
     ],
     hdrs=[

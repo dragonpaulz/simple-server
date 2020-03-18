@@ -1,6 +1,7 @@
 #ifndef TLV_VALUE_HPP
 #define TLV_VALUE_HPP
 
+#include <string>
 #include <vector>
 
 namespace TLVComponent
@@ -17,6 +18,7 @@ namespace TLVComponent
             
             bool isValid();
             std::vector<char> getValue() {return _value;}
+            std::string to_string();
         private:
             std::vector<char> _value;
     };
