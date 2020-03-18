@@ -25,13 +25,13 @@ void setup::Connection::handle_read(size_t message)
     // convert to message -> vector<char>
     std::vector<char> in();
 
-    TLVComponent::TLVmessage msgIn(in);
+    handler::TLVmessage msgIn(in);
     // additional checks with error logging for bad data here.
     // msg.isValid() to determine
     to_String(msgIn);
 }
 
-std::string setup::Connection::to_string(TLVComponent::TLVmessage msg)
+std::string setup::Connection::to_string(handler::TLVmessage msg)
 {
     // hard coding values. These are to be replaced
     // ip address could come from either client, or from somewhere in asio
