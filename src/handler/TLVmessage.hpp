@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 
-#include "Byte.hpp"
 #include "TLVComponent/Type.hpp"
 #include "TLVComponent/Value.hpp"
 #include "TLVComponent/Length.hpp"

@@ -1,4 +1,4 @@
-#include "../src/handler/Byte.hpp"
+#include "../src/handler/TLVComponent/helper/Byte.hpp"
 #include "gtest/gtest.h"
 
 using byte = handler::Byte;
