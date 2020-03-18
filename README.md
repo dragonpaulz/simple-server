@@ -1,19 +1,19 @@
-#TCP Server
+# TCP Server
 ==========
 
 Takes a Type-length-value message.
 
-##Requirements
+## Requirements
 ------------
 Uses bazel for package management, building, and testing. makefile contains up-to-date commands for building, running, and testing application.
 
-##Command-line arguments
+## Command-line arguments
 ---
 `--port` required, specifies a port number.
 
-##Left to do
+## Left to do
 ---
-src/setup/setup_helper/connection.cpp has notes on what I want to do, but need to actually do it.
+src/setup/setup_helper/connection.cpp is where the work needs to be done.
 
 * Client blocks when making a call.
 * Getting printout requires SIGINT on client-side.
@@ -24,7 +24,7 @@ src/setup/setup_helper/connection.cpp has notes on what I want to do, but need t
     * client input (so if they're connection from outside, show ip address they used)
 * Allow connections through ipv6
 
-###Room for improvement
+### Room for improvement
 * use iterators in src/handler to break apart vector<char> instead of hardcoding specific array items
 * add lengths of TLV components in their respective classes, so that they can change
     * have TLVmessage refer to said values to determine the delimitation of where one section starts and another ends, that way each of those classes are responsible for their own message sections.
