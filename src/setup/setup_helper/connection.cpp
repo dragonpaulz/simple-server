@@ -1,5 +1,4 @@
 #include "src/handler/TLVmessage.hpp"
-// #include "../../handler/TLVComponent/TLVmessage.hpp"
 #include "connection.hpp"
 
 #include <boost/asio.hpp>
@@ -16,7 +15,7 @@ void setup::Connection::start()
     std::cout << "in connection start" << std::endl;
 
     boost::asio::async_read(socket_, boost::asio::buffer(),
-        boost::bind(&setup::Connection::handle_write, shared_from_this(),
+        boost::bind(&setup::Connection::handle_read, shared_from_this(),
           boost::asio::placeholders::error,
           boost::asio::placeholders::bytes_transferred));
 }
