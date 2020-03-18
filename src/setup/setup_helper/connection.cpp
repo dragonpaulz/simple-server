@@ -22,13 +22,12 @@ void setup::Connection::start()
 
 void setup::Connection::handle_read(size_t message)
 {
-    // convert to message -> vector<char>
-    std::vector<char> in();
+    std::vector<char> in(message);
 
     handler::TLVmessage msgIn(in);
     // additional checks with error logging for bad data here.
     // msg.isValid() to determine
-    to_String(msgIn);
+    to_string(msgIn);
 }
 
 std::string setup::Connection::to_string(handler::TLVmessage msg)
